@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ScopeForm } from "@/components/r12/scope-form";
 import { Kicker, Shell } from "@/components/r12/shell";
-import { PREP, QUESTIONS } from "@/lib/r12/content";
+import { INQUIRY_EMAIL, inquiryMailto, PREP, QUESTIONS } from "@/lib/r12/content";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -10,7 +10,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Discuss a formal verification, a security audit, or a research collaboration. This page does not send the brief.",
+          "Email R12 Labs about a formal verification, a security audit, or a research collaboration. A saved brief stays on your device until you send it.",
       },
     ],
   }),
@@ -24,11 +24,19 @@ function ContactPage() {
         <Kicker index="06">Contact</Kicker>
         <h1 className="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl">Discuss a verification project.</h1>
         <p className="mt-5 max-w-2xl text-lg text-muted">
-          Use this for a formal verification, a security audit, a research conversation, or a
-          technical partnership. No public inbox is configured. Saving a brief keeps it in this
-          browser. It is not delivered. Copy it, or open it in your own mail client and choose the
-          recipient.
+          For a formal verification, a security audit, research, or a technical partnership, email{" "}
+          <a className="text-ink underline" href={`mailto:${INQUIRY_EMAIL}`}>
+            {INQUIRY_EMAIL}
+          </a>
+          . You can also draft a scope brief below and open it in your mail client. Saving a brief
+          keeps a copy in this browser only. This page does not send it.
         </p>
+        <a
+          className="mt-8 inline-flex h-12 items-center bg-signal px-5 text-sm font-medium text-on-signal"
+          href={inquiryMailto("R12 Labs inquiry")}
+        >
+          Email R12 Labs
+        </a>
       </section>
       <section className="mx-auto max-w-6xl px-5 pb-12 sm:px-8">
         <ScopeForm />
@@ -38,7 +46,7 @@ function ContactPage() {
           <div>
             <h2 className="font-serif text-3xl">What happens next</h2>
             <ol className="mt-4 space-y-3 text-muted">
-              <li>1. You send the brief. We do not receive it from this page.</li>
+              <li>1. You send the email. Saving a draft here does not deliver it.</li>
               <li>2. If the surface is in scope, we reply with what is in and what is out.</li>
               <li>3. The week range in the form is a planning hint, not a quote or a start date.</li>
             </ol>

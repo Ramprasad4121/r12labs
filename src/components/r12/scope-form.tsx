@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { planningRange } from "@/lib/r12/content";
+import { INQUIRY_EMAIL, inquiryMailto, planningRange } from "@/lib/r12/content";
 import { briefText, loadScopes, saveScope, scopeSchema, type ScopeInput, type StoredScope } from "@/lib/r12/scopes";
 
 const EMPTY: ScopeInput = {
@@ -162,8 +162,8 @@ export function ScopeForm() {
             Save brief
           </button>
           <p className="text-sm text-muted">
-            Saving does not send this brief. It stays in this browser until you copy it or open it
-            in your own mail client.
+            Saving stores a draft on this device. It does not email {INQUIRY_EMAIL}. After you
+            save, open the brief in your mail client and send it yourself.
           </p>
         </div>
         {saved ? (
@@ -173,9 +173,15 @@ export function ScopeForm() {
             </p>
             <p className="mt-2 font-serif text-2xl">Saved on this device only.</p>
             <p className="mt-2 text-muted">
-              {saved.protocol} · {saved.chain} · {saved.surface}. This page did not deliver it.
+              {saved.protocol} · {saved.chain} · {saved.surface}. Nothing was emailed.
             </p>
             <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+              <a
+                className="inline-flex h-11 items-center justify-center bg-signal px-4 text-sm font-medium text-on-signal"
+                href={inquiryMailto(`R12 Labs scope brief ${saved.id}`, briefText(saved))}
+              >
+                Email this brief
+              </a>
               <button
                 type="button"
                 className="h-11 border border-rule px-4 text-sm"
@@ -183,12 +189,6 @@ export function ScopeForm() {
               >
                 {copied ? "Copied" : "Copy brief"}
               </button>
-              <a
-                className="inline-flex h-11 items-center justify-center bg-signal px-4 text-sm font-medium text-on-signal"
-                href={`mailto:?subject=${encodeURIComponent(`R12 Labs scope brief ${saved.id}`)}&body=${encodeURIComponent(briefText(saved))}`}
-              >
-                Open in your mail client
-              </a>
             </div>
             {copyError ? (
               <p className="mt-3 text-sm text-signal">

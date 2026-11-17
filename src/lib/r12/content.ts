@@ -279,6 +279,15 @@ export const QUESTIONS = [
   "What is explicitly out of scope?",
 ] as const;
 
+export const INQUIRY_EMAIL = "ramprasadgoud34@gmail.com";
+
+export function inquiryMailto(subject: string, body?: string): string {
+  const params = new URLSearchParams();
+  params.set("subject", subject);
+  if (body) params.set("body", body);
+  return `mailto:${INQUIRY_EMAIL}?${params.toString()}`;
+}
+
 export const LINKS = {
   principal: "https://www.ramprasadgoud.dev",
   writing: "https://www.ramprasadgoud.dev/blog",
