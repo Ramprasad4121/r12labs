@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { S as require_jsx_runtime, Y as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { a as OFFERINGS, c as REFUSALS, l as Shell, r as Kicker } from "./shell-C62o14z1.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services-hjCZAQ-U.js
+import { n as Shell, o as OFFERINGS, t as Kicker } from "./shell-DenqLIPB.mjs";
+import { S as require_jsx_runtime, X as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/services-cSokgRKM.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var COMPARE = [
@@ -34,17 +34,14 @@ function ServicesPage() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
 				className: "mx-auto max-w-6xl px-5 pt-14 pb-8 sm:px-8",
 				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Kicker, {
-						index: "02",
-						children: "Services"
-					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Kicker, { children: "Services" }),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
 						className: "mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl",
 						children: "Verification first. Audits beside it."
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-5 max-w-2xl text-lg text-muted",
-						children: "The primary engagement is a formal verification of properties on EVM or Solana. A security audit is a separate question: an adversary reading the code. We do not describe one as the other."
+						children: "Formal verification checks written properties. Security review looks for adversarial failure modes."
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 						to: "/formal-verification",
@@ -95,16 +92,6 @@ function ServicesPage() {
 					})
 				})
 			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-				className: "mx-auto max-w-6xl px-5 pb-6 sm:px-8",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-					className: "text-3xl",
-					children: "Security audits"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mt-3 max-w-2xl text-muted",
-					children: "Manual review, threat modeling, fuzzing, and static analysis. High and Critical findings ship with a way to trigger them. The fix is retested. This is not a mathematical proof."
-				})]
-			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
 				className: "mx-auto max-w-6xl px-5 pb-16 sm:px-8",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
@@ -118,22 +105,15 @@ function ServicesPage() {
 								className: "flex w-full items-start gap-4 py-5 text-left sm:items-center sm:gap-8",
 								"aria-expanded": expanded,
 								onClick: () => setOpen(expanded ? "" : item.index),
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "w-10 shrink-0 pt-1 font-mono text-xs tracking-widest text-signal",
-										children: item.index
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "flex-1 font-serif text-2xl sm:text-3xl",
-										children: item.title
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-sm text-muted",
-										children: expanded ? "Close" : "Open"
-									})
-								]
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "flex-1 font-serif text-2xl sm:text-3xl",
+									children: item.title
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-sm text-muted",
+									children: expanded ? "Close" : "Open"
+								})]
 							}), expanded ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "grid gap-6 pb-8 sm:grid-cols-3 sm:pl-14",
+								className: "grid gap-6 pb-8 sm:grid-cols-3",
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: item.detail }),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -154,22 +134,6 @@ function ServicesPage() {
 							}) : null]
 						}, item.index);
 					})
-				})
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
-				className: "border-y border-rule bg-panel",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-8 md:grid-cols-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-3xl",
-						children: "What we will not do."
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
-						className: "border-t border-rule",
-						children: REFUSALS.map((line) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
-							className: "border-b border-rule py-4 text-lg",
-							children: line
-						}, line))
-					})]
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {

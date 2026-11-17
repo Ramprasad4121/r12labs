@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ScopeForm } from "@/components/r12/scope-form";
-import { Kicker, Shell } from "@/components/r12/shell";
-import { INQUIRY_EMAIL, inquiryMailto, PREP, QUESTIONS } from "@/lib/r12/content";
+import { Shell } from "@/components/r12/shell";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -10,7 +9,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Email R12 Labs about a formal verification, a security audit, or a research collaboration. A saved brief stays on your device until you send it.",
+          "Contact R12 Labs about formal verification or security review.",
       },
     ],
   }),
@@ -20,66 +19,14 @@ export const Route = createFileRoute("/contact")({
 function ContactPage() {
   return (
     <Shell page="Contact">
-      <section className="mx-auto max-w-6xl px-5 pt-14 pb-8 sm:px-8">
-        <Kicker index="06">Contact</Kicker>
-        <h1 className="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl">Discuss a verification project.</h1>
-        <p className="mt-5 max-w-2xl text-lg text-muted">
-          For a formal verification, a security audit, research, or a technical partnership, email{" "}
-          <a className="text-ink underline" href={`mailto:${INQUIRY_EMAIL}`}>
-            {INQUIRY_EMAIL}
-          </a>
-          . You can also draft a scope brief below and open it in your mail client. Saving a brief
-          keeps a copy in this browser only. This page does not send it.
-        </p>
-        <a
-          className="mt-8 inline-flex h-12 items-center bg-signal px-5 text-sm font-medium text-on-signal"
-          href={inquiryMailto("R12 Labs inquiry")}
-        >
-          Email R12 Labs
-        </a>
+      <section className="mx-auto max-w-6xl px-5 pt-14 pb-12 sm:px-8">
+        <p className="text-sm font-medium text-signal">Contact</p>
+        <h1 className="mt-4 max-w-4xl text-5xl leading-[1.02] sm:text-6xl">Contact R12 Labs.</h1>
+        <p className="mt-5 max-w-xl text-lg text-muted">Tell us what you need verified or reviewed.</p>
       </section>
-      <section className="mx-auto max-w-6xl px-5 pb-12 sm:px-8">
-        <ScopeForm />
-      </section>
-      <section className="border-t border-rule">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-2">
-          <div>
-            <h2 className="font-serif text-3xl">What happens next</h2>
-            <ol className="mt-4 space-y-3 text-muted">
-              <li>1. You send the email. Saving a draft here does not deliver it.</li>
-              <li>2. If the surface is in scope, we reply with what is in and what is out.</li>
-              <li>3. The week range in the form is a planning hint, not a quote or a start date.</li>
-            </ol>
-            <p className="mt-6 text-sm text-muted">
-              Confidentiality starts when a review is agreed, not when a draft sits in local
-              storage. Do not paste exploits or keys into the brief.
-            </p>
-          </div>
-          <div>
-            <h2 className="font-serif text-3xl">Have this ready</h2>
-            <ul className="mt-4 border-t border-rule">
-              {PREP.map((item) => (
-                <li key={item} className="border-b border-rule py-3 text-muted">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-      <section className="border-t border-rule bg-panel">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-8 md:grid-cols-[0.7fr_1.3fr]">
-          <h2 className="font-serif text-3xl">We will ask these if the brief skips them.</h2>
-          <ol className="border-t border-rule">
-            {QUESTIONS.map((question, index) => (
-              <li key={question} className="flex gap-4 border-b border-rule py-4">
-                <span className="font-mono text-xs text-signal">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span className="font-serif text-xl">{question}</span>
-              </li>
-            ))}
-          </ol>
+      <section className="border-y border-rule bg-panel">
+        <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
+          <ScopeForm />
         </div>
       </section>
     </Shell>

@@ -18,42 +18,34 @@ export const Route = createFileRoute("/methodology")({
 
 const PHASES = [
   {
-    index: "01",
     title: "Architecture",
     body: "The protocol as it actually moves value: who calls, what is stored, and which external systems are trusted.",
   },
   {
-    index: "02",
     title: "Properties",
     body: "The few statements that matter. Solvency, authorization, accounting, and the transitions that must be impossible.",
   },
   {
-    index: "03",
     title: "Specification",
     body: "Those statements written tightly enough that a failure produces a trace. Vague goals do not verify.",
   },
   {
-    index: "04",
     title: "Model",
     body: "The behavior we will reason about, including what is abstracted. An abstraction that hides the bug is called out, not hidden.",
   },
   {
-    index: "05",
     title: "Check",
     body: "The property is proved or it fails. Tooling follows the property. We do not pick a tool and hope the question fits.",
   },
   {
-    index: "06",
     title: "Counterexamples",
     body: "A failed property comes back as a trace. We read it before anyone calls it a bug, a model error, or a spec error.",
   },
   {
-    index: "07",
     title: "Fix",
     body: "After the code or the spec changes, the same property is checked again. A green status from a different question does not count.",
   },
   {
-    index: "08",
     title: "Delivery",
     body: "Scope, specifications, results, traces, findings from any audit work in the same engagement, and the limits in writing.",
   },
@@ -80,8 +72,7 @@ function MethodologyPage() {
           Specify the property. Then check it.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted">
-          The order is fixed. Architecture, then the property, then a model, then a result you can
-          argue with. A tool does not come first.
+          Architecture, property, model, result. The tool follows the question.
         </p>
       </section>
 
@@ -90,14 +81,13 @@ function MethodologyPage() {
           {PHASES.map((item, index) => {
             const on = index === active;
             return (
-              <li key={item.index} className="border-b border-rule">
+              <li key={item.title} className="border-b border-rule">
                 <button
                   type="button"
-                  className={`flex h-12 w-full items-center gap-4 text-left ${on ? "text-ink" : "text-muted"}`}
+                  className={`flex h-12 w-full items-center text-left ${on ? "text-ink" : "text-muted"}`}
                   aria-current={on ? "step" : undefined}
                   onClick={() => setActive(index)}
                 >
-                  <span className={`w-8 font-mono text-xs ${on ? "text-signal" : ""}`}>{item.index}</span>
                   <span>{item.title}</span>
                 </button>
               </li>
@@ -105,7 +95,7 @@ function MethodologyPage() {
           })}
         </ol>
         <article className="border border-rule bg-panel p-6 sm:p-10">
-          <p className="font-mono text-xs tracking-widest text-signal uppercase">Step {phase.index}</p>
+          <p className="text-sm font-medium text-signal">Method</p>
           <h2 className="mt-3 text-4xl">{phase.title}</h2>
           <p className="mt-5 max-w-xl text-lg">{phase.body}</p>
           <div className="mt-8 flex gap-3">
@@ -142,9 +132,7 @@ function MethodologyPage() {
         </div>
         <div className="mx-auto max-w-6xl px-5 pb-14 sm:px-8">
           <p className="max-w-2xl text-muted">
-            Verification proves only the specified properties, under the stated assumptions, in the
-            model we actually built. That sentence is part of the delivery, not a footnote we hope
-            nobody reads.
+            Results apply only to the specified properties, stated assumptions, and model.
           </p>
           <Link
             to="/contact"

@@ -1,9 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { S as require_jsx_runtime, Y as require_react, b as Link, p as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
+import { S as require_jsx_runtime, X as require_react, b as Link, p as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as Menu, t as X } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/shell-C62o14z1.js
-var import_react = /* @__PURE__ */ __toESM(require_react());
-var import_jsx_runtime = require_jsx_runtime();
+//#region node_modules/.nitro/vite/services/ssr/assets/content-B7Ni-Kda.js
 var NAV = [
 	{
 		to: "/formal-verification",
@@ -72,13 +70,6 @@ var OFFERINGS = [
 		leave: "A policy review: what it may touch, what happens when a feed is stale, and how a human revokes it.",
 		detail: "Allowlists, spend caps, and fail-closed behavior. The gap between “the prompt said not to” and “the chain will not allow it.” Offered only for systems that actually delegate authority."
 	}
-];
-var PREP = [
-	"Repository access, or a note that the code is not ready to share yet.",
-	"Deployed addresses, if anything is already live.",
-	"Who can upgrade, pause, or move funds.",
-	"Prior reviews, and what they did not cover.",
-	"The date you need a first read, and what is explicitly out of scope."
 ];
 var CLASSES = [
 	{
@@ -186,45 +177,24 @@ var CLASSES = [
 		lesson: "Default to deny. Stale, missing, and reverted are one outcome."
 	}
 ];
-var REFUSALS = [
-	"We do not sell an audit badge for a launch announcement.",
-	"We do not review code we did not read.",
-	"We do not publish private findings.",
-	"We do not staff a model and call the output a review. Search can be assisted. A person signs the report."
-];
-var QUESTIONS = [
-	"What must not break, in one sentence?",
-	"What is already deployed, and at which addresses?",
-	"Who can upgrade, pause, or move funds?",
-	"What did the last review miss, or never cover?",
-	"What is explicitly out of scope?"
-];
 var INQUIRY_EMAIL = "ramprasadgoud34@gmail.com";
-function inquiryMailto(subject, body) {
-	const params = new URLSearchParams();
-	params.set("subject", subject);
-	if (body) params.set("body", body);
-	return `mailto:${INQUIRY_EMAIL}?${params.toString()}`;
-}
 var LINKS = {
 	principal: "https://www.ramprasadgoud.dev",
 	writing: "https://www.ramprasadgoud.dev/blog",
 	github: "https://github.com/Ramprasad4121",
 	sentinel: "https://github.com/Ramprasad4121/anchor-sentinel"
 };
-function planningRange(size, surface) {
-	if (size === "15k+" || size === "Not sure") return "We will not invent a week count. The range comes after the repo is actually opened.";
-	if (surface === "Upgrade diff" && (size === "Under 1k" || size === "1–5k")) return "A diff of this size is often one to two weeks, including the fix check.";
-	if (size === "Under 1k") return "Often about a week, including the fix check. Not a quote.";
-	if (size === "1–5k") return "Often two to three weeks, including the fix check. Not a quote.";
-	if (surface === "Solana program" && size === "5–15k") return "Often three to five weeks, including the fix check. Not a quote.";
-	return "Often three to five weeks, including the fix check. Not a quote.";
-}
+//#endregion
+//#region node_modules/.nitro/vite/services/ssr/assets/shell-DenqLIPB.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
 function Mark({ className = "size-8" }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("img", {
-		src: "/favicon.svg",
+		src: "/r12-mark.svg",
 		alt: "",
-		className
+		"aria-hidden": "true",
+		className,
+		draggable: false
 	});
 }
 function Shell({ page, children }) {
@@ -265,12 +235,9 @@ function Header() {
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 					to: "/",
 					className: "flex items-center gap-2.5 text-ink",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mark, { className: "size-8 text-signal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-[15px] font-medium tracking-tight",
-						children: ["R12 ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-muted",
-							children: "Labs"
-						})]
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mark, { className: "size-8 text-signal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "text-sm font-semibold tracking-tight",
+						children: "R12 Labs"
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("nav", {
@@ -281,8 +248,8 @@ function Header() {
 						...item
 					}, item.to)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 						to: "/contact",
-						className: "inline-flex h-11 items-center bg-signal px-4 text-sm font-medium text-on-signal",
-						children: "Discuss a project"
+						className: "inline-flex h-10 items-center bg-signal px-4 text-sm font-medium text-on-signal transition-colors hover:bg-ink",
+						children: "Discuss a verification project"
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
@@ -312,8 +279,8 @@ function Header() {
 							className: `flex h-14 items-center justify-between font-serif text-2xl ${active ? "text-ink" : "text-muted"}`,
 							"aria-current": active ? "page" : void 0,
 							children: [item.label, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono text-xs tracking-widest",
-								children: active ? "●" : "→"
+								className: "text-sm",
+								children: active ? "•" : "→"
 							})]
 						})
 					}, item.to);
@@ -336,23 +303,16 @@ function Footer({ page }) {
 		className: "border-t border-rule",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.2fr_1fr]",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center gap-2 text-ink",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mark, { className: "size-7 text-signal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "text-base font-medium tracking-tight",
-						children: "R12 Labs"
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mt-3 max-w-sm text-muted",
-					children: "Formal verification and security engineering for EVM and Solana. Proof for the properties we specify. An audit when the question is adversarial, not mathematical."
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "mt-4 font-mono text-xs tracking-widest text-muted uppercase",
-					children: page
-				})
-			] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-2 text-ink",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mark, { className: "size-7 text-signal" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-base font-medium tracking-tight",
+					children: "R12 Labs"
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "mt-3 max-w-sm text-muted",
+				children: "Formal verification and security engineering for EVM and Solana."
+			})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "grid grid-cols-2 gap-8 text-sm",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "flex flex-col gap-3",
@@ -391,21 +351,11 @@ function Footer({ page }) {
 		})
 	});
 }
-function Kicker({ index, children }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-		className: "font-mono text-xs tracking-widest text-muted uppercase",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "text-signal",
-				children: index
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "px-2",
-				children: "/"
-			}),
-			children
-		]
+function Kicker({ children }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+		className: "text-sm font-medium text-signal",
+		children
 	});
 }
 //#endregion
-export { OFFERINGS as a, REFUSALS as c, planningRange as d, LINKS as i, Shell as l, INQUIRY_EMAIL as n, PREP as o, Kicker as r, QUESTIONS as s, CLASSES as t, inquiryMailto as u };
+export { LINKS as a, INQUIRY_EMAIL as i, Shell as n, OFFERINGS as o, CLASSES as r, Kicker as t };

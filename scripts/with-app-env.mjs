@@ -60,6 +60,28 @@ export function readAppEnv(root) {
   }
 }
 
+/**
+ * Load private runtime values from a local `.env` file without making them
+ * browser-visible. Vite only exposes `VITE_` names to client code; the Resend
+ * credentials remain available solely to server functions through process.env.
+ */
+export function readPrivateEnv(root) {
+  try {
+    const text = readFileSync(join(root, ".env"), "utf8");
+    const env = {};
+    for (const line of text.split(/\r?\n/)) {
+      const match = line.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*)\s*$/);
+      if (!match) continue;
+      const [, key, rawValue] = match;
+      const quoted = rawValue.match(/^(["'])(.*)\1$/);
+      env[key] = quoted ? quoted[2] : rawValue;
+    }
+    return env;
+  } catch {
+    return {};
+  }
+}
+
 /** File values under the process environment: an explicit override wins. */
 export function mergeAppEnv(appEnv, processEnv) {
   return { ...appEnv, ...processEnv };
@@ -110,7 +132,8 @@ function main(argv) {
     console.error("usage: node scripts/with-app-env.mjs <command> [args…]");
     process.exit(2);
   }
-  const env = mergeAppEnv(readAppEnv(projectRoot()), process.env);
+  const root = projectRoot();
+  const env = mergeAppEnv({ ...readPrivateEnv(root), ...readAppEnv(root) }, process.env);
   const child = spawn(command, args, { stdio: "inherit", env });
   // The dev server is long-running and is stopped by signalling this wrapper.
   for (const signal of ["SIGINT", "SIGTERM", "SIGHUP"]) {

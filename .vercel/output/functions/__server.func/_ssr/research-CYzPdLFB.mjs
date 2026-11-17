@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { S as require_jsx_runtime, Y as require_react } from "../_libs/@tanstack/react-router+[...].mjs";
-import { i as LINKS, l as Shell, t as CLASSES } from "./shell-C62o14z1.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/research-CP60Ao0-.js
+import { a as LINKS, n as Shell, r as CLASSES } from "./shell-DenqLIPB.mjs";
+import { S as require_jsx_runtime, X as require_react } from "../_libs/@tanstack/react-router+[...].mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/research-CYzPdLFB.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function severityTone(severity) {
@@ -176,7 +176,7 @@ function ResearchPage() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-5 max-w-2xl text-lg text-muted",
-						children: "Nothing on this page is a client result. The specification is a shape. The classes below are educational examples from audit work, not verified engagements."
+						children: "Educational examples, not client results."
 					})
 				]
 			}),
@@ -213,7 +213,7 @@ assumes
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mt-4 text-sm text-muted",
-							children: "A sketch of the shape. Not a property we have discharged for a protocol, and not a tool transcript."
+							children: "Illustrative specification. Not a protocol result."
 						})
 					]
 				})]
@@ -227,7 +227,7 @@ assumes
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-3 max-w-2xl text-muted",
-						children: "These are the shapes a manual review looks for. Each one is an example. None of them is a finding from a named system."
+						children: "Examples of what a manual review looks for; not findings from a named system."
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 						className: "mt-8",

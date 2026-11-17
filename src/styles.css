@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bone: #05060a;
-  --color-ink: #e7eef8;
-  --color-muted: #93a0b5;
-  --color-rule: #1a2130;
-  --color-signal: #3d7eff;
-  --color-on-signal: #05060a;
-  --color-panel: #0b0f18;
-  --font-sans: "Inter", "Helvetica Neue", system-ui, sans-serif;
-  --font-serif: "Space Grotesk", "Helvetica Neue", system-ui, sans-serif;
+  --color-bone: #f7f5f0;
+  --color-ink: #18232c;
+  --color-muted: #65707a;
+  --color-rule: #d9d5cc;
+  --color-signal: #1f4f6b;
+  --color-on-signal: #fffdf8;
+  --color-panel: #efede7;
+  --font-sans: "IBM Plex Sans", "Avenir Next", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --radius-sm: 2px;
+  --radius-sm: 0px;
 }
 
 @layer base {
@@ -26,7 +26,7 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.65;
     text-wrap: pretty;
   }
 
@@ -51,7 +51,7 @@
 
   ::selection {
     background: var(--color-signal);
-    color: #05060a;
+    color: var(--color-on-signal);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -66,5 +66,25 @@
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
     }
+  }
+}
+
+@layer components {
+  .hero-image-overlay {
+    background: linear-gradient(180deg, rgba(24, 35, 44, 0.04), rgba(24, 35, 44, 0.84));
+  }
+
+  .site-link {
+    text-decoration-line: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-signal) 35%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    transition-property: color, text-decoration-color;
+    transition-duration: 150ms;
+  }
+
+  .site-link:hover {
+    color: var(--color-signal);
+    text-decoration-color: var(--color-signal);
   }
 }

@@ -48,9 +48,7 @@ function VerificationPage() {
           Formal verification for EVM and Solana.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted">
-          We write the property, model the behavior that matters, and check it. The result is a
-          proof or a counterexample. It is not a test run, and it is not an audit report with the
-          word proof on the cover.
+          We write the property, model the behavior that matters, and return a proof or counterexample.
         </p>
       </section>
 
@@ -90,17 +88,8 @@ function VerificationPage() {
       <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8">
         <h2 className="max-w-2xl text-3xl">What a proof is not.</h2>
         <div className="mt-6 max-w-2xl space-y-4 text-muted">
-          <p>Testing shows behavior on the inputs you tried. It does not show the rest.</p>
-          <p>Static analysis flags patterns. A flag is not a theorem.</p>
-          <p>
-            A manual audit can find an attack the specification never mentioned. That is why audits
-            stay in the practice. They answer a different question.
-          </p>
-          <p>
-            Verification proves the properties that were written, in the model that was built,
-            under the assumptions that were stated. Change the code or the assumptions and the
-            result does not travel with you.
-          </p>
+          <p>Testing covers inputs. Static analysis flags patterns. Audits find attacks a specification may not name.</p>
+          <p>A proof applies only to the written property, stated assumptions, and model.</p>
         </div>
         <Link
           to="/contact"

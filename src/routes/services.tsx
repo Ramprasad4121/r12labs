@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Kicker, Shell } from "@/components/r12/shell";
-import { OFFERINGS, REFUSALS } from "@/lib/r12/content";
+import { OFFERINGS } from "@/lib/r12/content";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
@@ -30,14 +30,12 @@ function ServicesPage() {
   return (
     <Shell page="Services">
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-8 sm:px-8">
-        <Kicker index="02">Services</Kicker>
+        <Kicker>Services</Kicker>
         <h1 className="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl">
           Verification first. Audits beside it.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted">
-          The primary engagement is a formal verification of properties on EVM or Solana. A
-          security audit is a separate question: an adversary reading the code. We do not describe
-          one as the other.
+          Formal verification checks written properties. Security review looks for adversarial failure modes.
         </p>
         <Link to="/formal-verification" className="mt-6 inline-flex text-sm text-signal">
           Formal verification
@@ -67,14 +65,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pb-6 sm:px-8">
-        <h2 className="text-3xl">Security audits</h2>
-        <p className="mt-3 max-w-2xl text-muted">
-          Manual review, threat modeling, fuzzing, and static analysis. High and Critical findings
-          ship with a way to trigger them. The fix is retested. This is not a mathematical proof.
-        </p>
-      </section>
-
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-8">
         <ul className="border-t border-rule">
           {OFFERINGS.map((item) => {
@@ -87,14 +77,11 @@ function ServicesPage() {
                   aria-expanded={expanded}
                   onClick={() => setOpen(expanded ? "" : item.index)}
                 >
-                  <span className="w-10 shrink-0 pt-1 font-mono text-xs tracking-widest text-signal">
-                    {item.index}
-                  </span>
                   <span className="flex-1 font-serif text-2xl sm:text-3xl">{item.title}</span>
                   <span className="text-sm text-muted">{expanded ? "Close" : "Open"}</span>
                 </button>
                 {expanded ? (
-                  <div className="grid gap-6 pb-8 sm:grid-cols-3 sm:pl-14">
+                  <div className="grid gap-6 pb-8 sm:grid-cols-3">
                     <p>{item.detail}</p>
                     <p>
                       <span className="font-mono text-[11px] tracking-widest text-muted uppercase">Fits when</span>
@@ -110,19 +97,6 @@ function ServicesPage() {
             );
           })}
         </ul>
-      </section>
-
-      <section className="border-y border-rule bg-panel">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-8 md:grid-cols-2">
-          <h2 className="text-3xl">What we will not do.</h2>
-          <ul className="border-t border-rule">
-            {REFUSALS.map((line) => (
-              <li key={line} className="border-b border-rule py-4 text-lg">
-                {line}
-              </li>
-            ))}
-          </ul>
-        </div>
       </section>
 
       <section className="mx-auto flex max-w-6xl flex-col items-start gap-4 px-5 py-16 sm:px-8">

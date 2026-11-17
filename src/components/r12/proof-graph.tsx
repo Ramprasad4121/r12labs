@@ -96,10 +96,10 @@ export function ProofGraph() {
   const broken = property.status === "counterexample";
 
   return (
-    <figure className="border border-rule bg-panel">
-      <figcaption className="flex items-center justify-between gap-3 border-b border-rule px-4 py-3 sm:px-5">
-        <span className="font-mono text-xs tracking-widest text-muted uppercase">Property sketch</span>
-        <span className={`font-mono text-xs tracking-widest uppercase ${broken ? "text-signal" : "text-muted"}`}>
+    <figure className="border border-ink bg-ink text-on-signal">
+      <figcaption className="flex items-center justify-between gap-3 border-b border-on-signal/20 px-4 py-3 sm:px-5">
+        <span className="text-xs font-medium text-on-signal/65">Property explorer</span>
+        <span className={`text-xs font-medium ${broken ? "text-on-signal" : "text-on-signal/65"}`}>
           {broken ? "Counterexample" : "Holds"}
         </span>
       </figcaption>
@@ -124,7 +124,7 @@ export function ProofGraph() {
                 key={item.id}
                 type="button"
                 aria-pressed={on}
-                className={`h-9 px-3 text-sm ${on ? "bg-signal text-on-signal" : "text-muted"}`}
+            className={`h-9 px-3 text-sm ${on ? "bg-on-signal text-ink" : "text-on-signal/65 hover:text-on-signal"}`}
                 onClick={() => setActive(item.id)}
               >
                 {item.name}
@@ -132,8 +132,8 @@ export function ProofGraph() {
             );
           })}
         </div>
-        <p className="mt-4 font-mono text-sm text-ink">{property.spec}</p>
-        <p className="mt-2 text-sm text-muted">{property.trace}</p>
+        <p className="mt-4 font-mono text-sm text-on-signal">{property.spec}</p>
+        <p className="mt-2 text-sm text-on-signal/65">{property.trace}</p>
       </div>
     </figure>
   );

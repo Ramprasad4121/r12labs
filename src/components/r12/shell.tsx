@@ -46,8 +46,8 @@ function Header() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <Link to="/" className="flex items-center gap-2.5 text-ink">
           <Mark className="size-8 text-signal" />
-          <span className="text-[15px] font-medium tracking-tight">
-            R12 <span className="text-muted">Labs</span>
+          <span className="text-sm font-semibold tracking-tight">
+            R12 Labs
           </span>
         </Link>
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary">
@@ -56,7 +56,7 @@ function Header() {
           ))}
           <Link
             to="/contact"
-            className="inline-flex h-11 items-center bg-signal px-4 text-sm font-medium text-on-signal"
+            className="inline-flex h-10 items-center bg-signal px-4 text-sm font-medium text-on-signal transition-colors hover:bg-ink"
           >
             Discuss a verification project
           </Link>
@@ -89,7 +89,7 @@ function Header() {
                     aria-current={active ? "page" : undefined}
                   >
                     {item.label}
-                    <span className="font-mono text-xs tracking-widest">{active ? "●" : "→"}</span>
+                    <span className="text-sm">{active ? "•" : "→"}</span>
                   </Link>
                 </li>
               );
@@ -133,9 +133,8 @@ function Footer({ page }: { page: string }) {
             <span className="text-base font-medium tracking-tight">R12 Labs</span>
           </div>
           <p className="mt-3 max-w-sm text-muted">
-            Formal verification and security engineering for EVM and Solana. Proof for the properties we specify. An audit when the question is adversarial, not mathematical.
+            Formal verification and security engineering for EVM and Solana.
           </p>
-          <p className="mt-4 font-mono text-xs tracking-widest text-muted uppercase">{page}</p>
         </div>
         <div className="grid grid-cols-2 gap-8 text-sm">
           <div className="flex flex-col gap-3">
@@ -162,12 +161,8 @@ function Footer({ page }: { page: string }) {
   );
 }
 
-export function Kicker({ index, children }: { index: string; children: React.ReactNode }) {
+export function Kicker({ children }: { children: React.ReactNode }) {
   return (
-    <p className="font-mono text-xs tracking-widest text-muted uppercase">
-      <span className="text-signal">{index}</span>
-      <span className="px-2">/</span>
-      {children}
-    </p>
+    <p className="text-sm font-medium text-signal">{children}</p>
   );
 }

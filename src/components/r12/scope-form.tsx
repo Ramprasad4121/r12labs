@@ -1,291 +1,191 @@
-import { cloneElement, isValidElement, useEffect, useId, useState } from "react";
-import { INQUIRY_EMAIL, inquiryMailto, planningRange } from "@/lib/r12/content";
-import { briefText, loadScopes, saveScope, scopeSchema, type ScopeInput, type StoredScope } from "@/lib/r12/scopes";
+import { cloneElement, useId, useState } from "react";
+import { INQUIRY_EMAIL } from "@/lib/r12/content";
+import { sendContactInquiry } from "@/lib/r12/contact";
 
-const EMPTY: ScopeInput = {
-  name: "",
-  email: "",
-  protocol: "",
-  chain: "EVM",
-  kind: "Formal verification",
-  surface: "Contracts",
-  stage: "Pre-launch",
-  size: "1–5k",
-  needed: "",
-  invariants: "",
+const ENGAGEMENTS = [
+  "Formal verification",
+  "Security review",
+  "Verification strategy",
+] as const;
+
+const CODE_STATES = [
+  "Public repository",
+  "Private repository",
+  "Still in design",
+  "Prefer to discuss first",
+] as const;
+
+const TIMEFRAMES = [
+  "Planning the work",
+  "Within four weeks",
+  "One to two months",
+  "No fixed window",
+] as const;
+
+type Inquiry = {
+  name: string;
+  email: string;
+  organization: string;
+  engagement: (typeof ENGAGEMENTS)[number] | "";
+  property: string;
+  system: string;
+  codeState: (typeof CODE_STATES)[number] | "";
+  timing: (typeof TIMEFRAMES)[number] | "";
+  website: string;
 };
 
-type FieldErrors = Partial<Record<keyof ScopeInput, string>>;
+const EMPTY: Inquiry = {
+  name: "",
+  email: "",
+  organization: "",
+  engagement: "",
+  property: "",
+  system: "",
+  codeState: "",
+  timing: "",
+  website: "",
+};
+
+type Errors = Partial<Record<keyof Inquiry, string>>;
 
 export function ScopeForm() {
   const [values, setValues] = useState(EMPTY);
-  const [errors, setErrors] = useState<FieldErrors>({});
-  const [saved, setSaved] = useState<StoredScope | null>(null);
-  const [prior, setPrior] = useState<StoredScope[]>([]);
-  const [copied, setCopied] = useState(false);
-  const [copyError, setCopyError] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    setPrior(loadScopes());
-  }, [saved]);
-
-  const range = planningRange(values.size, values.surface);
-
-  function update<K extends keyof ScopeInput>(key: K, value: ScopeInput[K]) {
-    setValues((current) => ({ ...current, [key]: value }));
-    setErrors((current) => ({ ...current, [key]: undefined }));
+  function update<T extends keyof Inquiry>(field: T, value: Inquiry[T]) {
+    setValues((current) => ({ ...current, [field]: value }));
+    setErrors((current) => ({ ...current, [field]: undefined }));
+    if (status === "error") setStatus("idle");
   }
 
-  function onSubmit(event: React.FormEvent) {
+  async function submit(event: React.FormEvent) {
     event.preventDefault();
-    const parsed = scopeSchema.safeParse(values);
-    if (!parsed.success) {
-      const next: FieldErrors = {};
-      for (const issue of parsed.error.issues) {
-        const key = issue.path[0];
-        if (typeof key === "string" && !(key in next)) {
-          next[key as keyof ScopeInput] = issue.message;
-        }
+    const next: Errors = {};
+    if (!values.name.trim()) next.name = "Enter your name.";
+    if (!/^\S+@\S+\.\S+$/.test(values.email)) next.email = "Enter a valid work email.";
+    if (!values.organization.trim()) next.organization = "Enter the company or protocol.";
+    if (!values.engagement) next.engagement = "Choose one.";
+    if (!values.property.trim()) next.property = "Describe the property or risk.";
+    setErrors(next);
+    if (Object.keys(next).length) return;
+
+    setStatus("sending");
+    setMessage("");
+    try {
+      const result = await sendContactInquiry({
+        data: {
+          ...values,
+          engagement: values.engagement as Exclude<Inquiry["engagement"], "">,
+          codeState: values.codeState || undefined,
+          timing: values.timing || undefined,
+        },
+      });
+      if (result.ok) {
+        setStatus("sent");
+        return;
       }
-      setErrors(next);
-      setSaved(null);
-      return;
+      setStatus("error");
+      setMessage(result.message);
+    } catch {
+      setStatus("error");
+      setMessage("We could not send your enquiry. Please email the team directly.");
     }
-    const row = saveScope(parsed.data);
-    setSaved(row);
-    setCopied(false);
-    setValues(EMPTY);
   }
 
-  async function copy(scope: StoredScope) {
-    try {
-      await navigator.clipboard.writeText(briefText(scope));
-      setCopied(true);
-      setCopyError(false);
-    } catch {
-      setCopied(false);
-      setCopyError(true);
-    }
+  if (status === "sent") {
+    return (
+      <div className="max-w-2xl border-t border-ink pt-6">
+        <p className="text-sm font-medium text-signal">Enquiry sent</p>
+        <h2 className="mt-3 text-3xl">We will reply by email.</h2>
+        <button type="button" onClick={() => { setValues(EMPTY); setStatus("idle"); }} className="mt-7 site-link text-sm text-ink">
+          Send another enquiry
+        </button>
+      </div>
+    );
   }
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
-      <form className="border border-rule" onSubmit={onSubmit} noValidate>
-        <div className="border-b border-rule px-4 py-3 font-mono text-xs tracking-widest text-muted uppercase sm:px-5">
-          Scope brief — kept in this browser
-        </div>
-        <div className="grid gap-5 px-4 py-6 sm:px-5">
-          <Field label="Name" error={errors.name}>
-            <input
-              className={inputClass}
-              value={values.name}
-              autoComplete="name"
-              onChange={(e) => update("name", e.target.value)}
-            />
-          </Field>
-          <Field label="Email" error={errors.email}>
-            <input
-              className={inputClass}
-              type="email"
-              value={values.email}
-              autoComplete="email"
-              onChange={(e) => update("email", e.target.value)}
-            />
-          </Field>
-          <Field label="Protocol or repo" error={errors.protocol}>
-            <input
-              className={inputClass}
-              value={values.protocol}
-              onChange={(e) => update("protocol", e.target.value)}
-            />
-          </Field>
-          <div className="grid gap-5 sm:grid-cols-2">
-            <Select
-              label="Engagement"
-              value={values.kind}
-              options={["Formal verification", "Security audit", "Research", "Not sure"] as const}
-              onChange={(value) => update("kind", value)}
-            />
-            <Select
-              label="Chain"
-              value={values.chain}
-              options={["EVM", "Solana", "Both", "Not sure"] as const}
-              onChange={(value) => update("chain", value)}
-            />
-            <Select
-              label="Stage"
-              value={values.stage}
-              options={["Design", "Pre-launch", "Live", "Incident"] as const}
-              onChange={(value) => update("stage", value)}
-            />
-          </div>
-          <Select
-            label="Surface"
-            value={values.surface}
-            options={
-              [
-                "Contracts",
-                "Solana program",
-                "Upgrade diff",
-                "Oracle and accounting",
-                "Agent policy",
-              ] as const
-            }
-            onChange={(value) => update("surface", value)}
-          />
-          <Select
-            label="Approximate size"
-            value={values.size}
-            options={["Under 1k", "1–5k", "5–15k", "15k+", "Not sure"] as const}
-            onChange={(value) => update("size", value)}
-          />
-          <Field label="When you need a first read" error={errors.needed}>
-            <input
-              className={inputClass}
-              value={values.needed}
-              placeholder="A date, or ‘before the upgrade’"
-              onChange={(e) => update("needed", e.target.value)}
-            />
-          </Field>
-          <Field label="What must not break" error={errors.invariants}>
-            <textarea
-              className="min-h-28 w-full resize-y border border-rule bg-bone px-3 py-3 font-serif text-ink outline-none focus:border-ink"
-              value={values.invariants}
-              onChange={(e) => update("invariants", e.target.value)}
-            />
-          </Field>
-          <p className="border-l-2 border-signal pl-4 text-muted">{range}</p>
-          <button
-            type="submit"
-            className="h-12 bg-signal text-sm font-medium text-on-signal"
-          >
-            Save brief
-          </button>
-          <p className="text-sm text-muted">
-            Saving stores a draft on this device. It does not email {INQUIRY_EMAIL}. After you
-            save, open the brief in your mail client and send it yourself.
-          </p>
-        </div>
-        {saved ? (
-          <div className="border-t border-rule bg-panel px-4 py-5 sm:px-5" role="status">
-            <p className="font-mono text-xs tracking-widest text-signal uppercase">
-              Brief {saved.id} · not sent
-            </p>
-            <p className="mt-2 font-serif text-2xl">Saved on this device only.</p>
-            <p className="mt-2 text-muted">
-              {saved.protocol} · {saved.chain} · {saved.surface}. Nothing was emailed.
-            </p>
-            <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-              <a
-                className="inline-flex h-11 items-center justify-center bg-signal px-4 text-sm font-medium text-on-signal"
-                href={inquiryMailto(`R12 Labs scope brief ${saved.id}`, briefText(saved))}
-              >
-                Email this brief
-              </a>
-              <button
-                type="button"
-                className="h-11 border border-rule px-4 text-sm"
-                onClick={() => copy(saved)}
-              >
-                {copied ? "Copied" : "Copy brief"}
+    <form onSubmit={submit} noValidate className="max-w-2xl">
+      <div className="border-b border-rule pb-6">
+        <p className="text-sm font-medium text-signal">Engagement enquiry</p>
+        <p className="mt-3 text-muted">Do not include private keys, credentials, or unpublished vulnerability details.</p>
+      </div>
+      <div className="mt-7 grid gap-6 sm:grid-cols-2">
+        <Field label="Your name" error={errors.name}>
+          <input value={values.name} autoComplete="name" onChange={(event) => update("name", event.target.value)} />
+        </Field>
+        <Field label="Work email" error={errors.email}>
+          <input type="email" value={values.email} autoComplete="email" onChange={(event) => update("email", event.target.value)} />
+        </Field>
+      </div>
+      <div className="mt-6">
+        <Field label="Company or protocol" error={errors.organization}>
+          <input value={values.organization} onChange={(event) => update("organization", event.target.value)} />
+        </Field>
+      </div>
+      <fieldset className="mt-7">
+        <legend className="text-sm font-medium text-ink">Engagement</legend>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {ENGAGEMENTS.map((engagement) => {
+            const selected = values.engagement === engagement;
+            return (
+              <button key={engagement} type="button" aria-pressed={selected} onClick={() => update("engagement", engagement)} className={`min-h-10 border px-3 text-sm transition-colors ${selected ? "border-ink bg-ink text-on-signal" : "border-rule bg-bone text-ink hover:border-ink"}`}>
+                {engagement}
               </button>
-            </div>
-            {copyError ? (
-              <p className="mt-3 text-sm text-signal">
-                Clipboard was blocked. Use the mail link, or select the brief from a saved draft.
-              </p>
-            ) : null}
-          </div>
-        ) : null}
-      </form>
-      <aside>
-        <p className="font-mono text-xs tracking-widest text-muted uppercase">Drafts on this device</p>
-        {prior.length === 0 ? (
-          <p className="mt-4 text-muted">None yet. A saved brief stays in local storage.</p>
-        ) : (
-          <ul className="mt-4 border-t border-rule">
-            {prior.map((row) => (
-              <li key={row.id} className="border-b border-rule py-4">
-                <p className="font-mono text-xs tracking-widest text-signal">{row.id}</p>
-                <p className="mt-1 font-serif text-xl">{row.protocol}</p>
-                <p className="text-sm text-muted">
-                  {row.chain} · {row.stage} · {row.size}
-                </p>
-              </li>
-            ))}
-          </ul>
-        )}
-      </aside>
-    </div>
+            );
+          })}
+        </div>
+        {errors.engagement ? <p className="mt-2 text-sm text-signal">{errors.engagement}</p> : null}
+      </fieldset>
+      <div className="mt-7">
+        <Field label="What must remain true?" error={errors.property}>
+          <textarea rows={5} value={values.property} placeholder="For example: collateral remains solvent across an upgrade." onChange={(event) => update("property", event.target.value)} />
+        </Field>
+      </div>
+      <div className="mt-6">
+        <Field label="System and scope" optional>
+          <input value={values.system} placeholder="Chain, component, release, or change set" onChange={(event) => update("system", event.target.value)} />
+        </Field>
+      </div>
+      <div className="mt-6 grid gap-6 sm:grid-cols-2">
+        <Field label="Code availability" optional>
+          <select value={values.codeState} onChange={(event) => update("codeState", event.target.value as Inquiry["codeState"])}>
+            <option value="">Select one</option>
+            {CODE_STATES.map((state) => <option key={state}>{state}</option>)}
+          </select>
+        </Field>
+        <Field label="Desired window" optional>
+          <select value={values.timing} onChange={(event) => update("timing", event.target.value as Inquiry["timing"])}>
+            <option value="">Select one</option>
+            {TIMEFRAMES.map((timeframe) => <option key={timeframe}>{timeframe}</option>)}
+          </select>
+        </Field>
+      </div>
+      <div className="sr-only" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" tabIndex={-1} autoComplete="off" value={values.website} onChange={(event) => update("website", event.target.value)} />
+      </div>
+      <div className="mt-8 flex flex-wrap items-center gap-4">
+        <button type="submit" disabled={status === "sending"} className="h-12 bg-signal px-5 text-sm font-medium text-on-signal transition-colors hover:bg-ink disabled:cursor-wait disabled:opacity-70">
+          {status === "sending" ? "Sending…" : "Send enquiry"}
+        </button>
+        {status === "error" ? <a href={`mailto:${INQUIRY_EMAIL}`} className="site-link text-sm text-ink">Email the team directly</a> : null}
+      </div>
+      {status === "error" ? <p className="mt-4 text-sm text-signal" role="alert">{message}</p> : null}
+    </form>
   );
 }
 
-const inputClass =
-  "h-12 w-full border border-rule bg-bone px-3 font-serif text-ink outline-none focus:border-ink";
-
-function Field({
-  label,
-  error,
-  children,
-}: {
-  label: string;
-  error?: string;
-  children: React.ReactElement<Record<string, unknown>>;
-}) {
+function Field({ label, optional = false, error, children }: { label: string; optional?: boolean; error?: string; children: React.ReactElement<{ id?: string; className?: string; "aria-invalid"?: boolean; "aria-describedby"?: string }> }) {
   const id = useId();
   const errorId = `${id}-error`;
-  const control = isValidElement(children)
-    ? cloneElement(children, {
-        id,
-        "aria-invalid": error ? true : undefined,
-        "aria-describedby": error ? errorId : undefined,
-      })
-    : children;
-
-  return (
-    <div>
-      <label htmlFor={id} className="font-mono text-[11px] tracking-widest text-muted uppercase">
-        {label}
-      </label>
-      <div className="mt-2">{control}</div>
-      {error ? (
-        <p id={errorId} className="mt-1 text-sm text-signal">
-          {error}
-        </p>
-      ) : null}
-    </div>
-  );
-}
-
-function Select<T extends string>({
-  label,
-  value,
-  options,
-  onChange,
-}: {
-  label: string;
-  value: T;
-  options: readonly T[];
-  onChange: (value: T) => void;
-}) {
-  const id = useId();
-  return (
-    <div>
-      <label htmlFor={id} className="font-mono text-[11px] tracking-widest text-muted uppercase">
-        {label}
-      </label>
-      <select
-        id={id}
-        className={`${inputClass} mt-2`}
-        value={value}
-        onChange={(event) => onChange(event.target.value as T)}
-      >
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
+  const control = cloneElement(children, {
+    id,
+    className: "w-full border-b border-rule bg-transparent py-3 text-base text-ink outline-none placeholder:text-muted focus:border-signal",
+    "aria-invalid": error ? true : undefined,
+    "aria-describedby": error ? errorId : undefined,
+  });
+  return <div><label htmlFor={id} className="text-sm font-medium text-ink">{label}{optional ? <span className="pl-1 text-muted">(optional)</span> : null}</label><div className="mt-1">{control}</div>{error ? <p id={errorId} className="mt-2 text-sm text-signal">{error}</p> : null}</div>;
 }

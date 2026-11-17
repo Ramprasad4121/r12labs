@@ -33,8 +33,7 @@ function ResearchPage() {
           The vocabulary, then the classes.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-muted">
-          Nothing on this page is a client result. The specification is a shape. The classes below
-          are educational examples from audit work, not verified engagements.
+          Educational examples, not client results.
         </p>
       </section>
 
@@ -59,8 +58,7 @@ assumes
   admin_key_uncompromised`}</code>
           </pre>
           <p className="mt-4 text-sm text-muted">
-            A sketch of the shape. Not a property we have discharged for a protocol, and not a tool
-            transcript.
+            Illustrative specification. Not a protocol result.
           </p>
         </div>
       </section>
@@ -68,8 +66,7 @@ assumes
       <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-8">
         <h2 className="text-3xl">Audit classes, for the work that is not a proof.</h2>
         <p className="mt-3 max-w-2xl text-muted">
-          These are the shapes a manual review looks for. Each one is an example. None of them is a
-          finding from a named system.
+          Examples of what a manual review looks for; not findings from a named system.
         </p>
         <div className="mt-8">
           <ClassBrowser />

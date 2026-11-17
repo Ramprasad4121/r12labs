@@ -1,6 +1,6 @@
+import { n as Shell } from "./shell-DenqLIPB.mjs";
 import { S as require_jsx_runtime, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { l as Shell } from "./shell-C62o14z1.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/formal-verification-Ch8xaJa8.js
+//#region node_modules/.nitro/vite/services/ssr/assets/formal-verification-CRxf3tuQ.js
 var import_jsx_runtime = require_jsx_runtime();
 var EVM = [
 	"Solidity specifications for the functions that move value.",
@@ -40,7 +40,7 @@ function VerificationPage() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-5 max-w-2xl text-lg text-muted",
-						children: "We write the property, model the behavior that matters, and check it. The result is a proof or a counterexample. It is not a test run, and it is not an audit report with the word proof on the cover."
+						children: "We write the property, model the behavior that matters, and return a proof or counterexample."
 					})
 				]
 			}),
@@ -97,12 +97,7 @@ function VerificationPage() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "mt-6 max-w-2xl space-y-4 text-muted",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Testing shows behavior on the inputs you tried. It does not show the rest." }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Static analysis flags patterns. A flag is not a theorem." }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "A manual audit can find an attack the specification never mentioned. That is why audits stay in the practice. They answer a different question." }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Verification proves the properties that were written, in the model that was built, under the assumptions that were stated. Change the code or the assumptions and the result does not travel with you." })
-						]
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "Testing covers inputs. Static analysis flags patterns. Audits find attacks a specification may not name." }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "A proof applies only to the written property, stated assumptions, and model." })]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 						to: "/contact",

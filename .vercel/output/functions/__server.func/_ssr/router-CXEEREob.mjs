@@ -1,8 +1,8 @@
 import { i as __toESM, n as __exportAll } from "../_runtime.mjs";
-import { K as redirect, S as require_jsx_runtime, Y as require_react, _ as lazyRouteComponent, b as Link, d as Scripts, f as HeadContent, g as Outlet, h as createRouter, v as createFileRoute, x as useRouter, y as createRootRoute } from "../_libs/@tanstack/react-router+[...].mjs";
-import { a as string, i as object, n as literal, o as union, r as number } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/router-m0V_Zo9C.js
-var router_m0V_Zo9C_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
+import { S as require_jsx_runtime, X as require_react, _ as lazyRouteComponent, b as Link, d as Scripts, f as HeadContent, g as Outlet, h as createRouter, q as redirect, v as createFileRoute, x as useRouter, y as createRootRoute } from "../_libs/@tanstack/react-router+[...].mjs";
+import { a as union, i as string, n as number, r as object, t as literal } from "../_libs/zod.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/router-CXEEREob.js
+var router_CXEEREob_exports = /* @__PURE__ */ __exportAll({ getRouter: () => getRouter });
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var FALLBACK_MESSAGE = "An unexpected error occurred. Try reloading the page.";
@@ -326,8 +326,8 @@ function PreviewHostBridge() {
 	}, [router]);
 	return null;
 }
-var styles_default = "/assets/styles-XP7nt2-I.css";
-var FONT = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap";
+var styles_default = "/assets/styles-CSMQrK8M.css";
+var FONT = "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap";
 var Route$11 = createRootRoute({
 	head: () => ({
 		meta: [
@@ -343,7 +343,7 @@ var Route$11 = createRootRoute({
 			},
 			{
 				name: "theme-color",
-				content: "#05060a"
+				content: "#f7f5f0"
 			}
 		],
 		links: [
@@ -414,15 +414,15 @@ function NotFound() {
 		]
 	});
 }
-var $$splitComponentImporter$6 = () => import("./routes-DRaukF83.mjs");
+var $$splitComponentImporter$6 = () => import("./routes-t-pN9F1D.mjs");
 var Route$10 = createFileRoute("/")({
-	head: () => ({ meta: [{ title: "R12 Labs — Security through proof" }, {
+	head: () => ({ meta: [{ title: "R12 Labs — Formal verification for onchain systems" }, {
 		name: "description",
-		content: "Formal verification and security engineering for EVM and Solana. Security audits when the question is adversarial, not a proof."
+		content: "R12 Labs helps EVM and Solana teams formalize and verify the protocol properties they cannot afford to break."
 	}] }),
 	component: lazyRouteComponent($$splitComponentImporter$6, "component")
 });
-var $$splitComponentImporter$5 = () => import("./about-DjvYC-iM.mjs");
+var $$splitComponentImporter$5 = () => import("./about-BOzI5slx.mjs");
 var Route$9 = createFileRoute("/about")({
 	head: () => ({ meta: [{ title: "About — R12 Labs" }, {
 		name: "description",
@@ -433,18 +433,18 @@ var Route$9 = createFileRoute("/about")({
 var Route$8 = createFileRoute("/bench")({ beforeLoad: () => {
 	throw redirect({ to: "/research" });
 } });
-var $$splitComponentImporter$4 = () => import("./contact-BtFIEilM.mjs");
+var $$splitComponentImporter$4 = () => import("./contact-CZ_7Z4qO.mjs");
 var Route$7 = createFileRoute("/contact")({
 	head: () => ({ meta: [{ title: "Contact — R12 Labs" }, {
 		name: "description",
-		content: "Email R12 Labs about a formal verification, a security audit, or a research collaboration. A saved brief stays on your device until you send it."
+		content: "Contact R12 Labs about formal verification or security review."
 	}] }),
 	component: lazyRouteComponent($$splitComponentImporter$4, "component")
 });
 var Route$6 = createFileRoute("/engage")({ beforeLoad: () => {
 	throw redirect({ to: "/contact" });
 } });
-var $$splitComponentImporter$3 = () => import("./formal-verification-Ch8xaJa8.mjs");
+var $$splitComponentImporter$3 = () => import("./formal-verification-CRxf3tuQ.mjs");
 var Route$5 = createFileRoute("/formal-verification")({
 	head: () => ({ meta: [{ title: "Formal verification — R12 Labs" }, {
 		name: "description",
@@ -455,7 +455,7 @@ var Route$5 = createFileRoute("/formal-verification")({
 var Route$4 = createFileRoute("/method")({ beforeLoad: () => {
 	throw redirect({ to: "/methodology" });
 } });
-var $$splitComponentImporter$2 = () => import("./methodology-Dknv20oq.mjs");
+var $$splitComponentImporter$2 = () => import("./methodology-DscAcgur.mjs");
 var Route$3 = createFileRoute("/methodology")({
 	head: () => ({ meta: [{ title: "Methodology — R12 Labs" }, {
 		name: "description",
@@ -466,7 +466,7 @@ var Route$3 = createFileRoute("/methodology")({
 var Route$2 = createFileRoute("/practice")({ beforeLoad: () => {
 	throw redirect({ to: "/services" });
 } });
-var $$splitComponentImporter$1 = () => import("./research-CP60Ao0-.mjs");
+var $$splitComponentImporter$1 = () => import("./research-CYzPdLFB.mjs");
 var Route$1 = createFileRoute("/research")({
 	head: () => ({ meta: [{ title: "Research — R12 Labs" }, {
 		name: "description",
@@ -474,7 +474,7 @@ var Route$1 = createFileRoute("/research")({
 	}] }),
 	component: lazyRouteComponent($$splitComponentImporter$1, "component")
 });
-var $$splitComponentImporter = () => import("./services-hjCZAQ-U.mjs");
+var $$splitComponentImporter = () => import("./services-cSokgRKM.mjs");
 var Route = createFileRoute("/services")({
 	head: () => ({ meta: [{ title: "Services — R12 Labs" }, {
 		name: "description",
@@ -548,4 +548,4 @@ function getRouter() {
 	});
 }
 //#endregion
-export { getRouter, router_m0V_Zo9C_exports as t };
+export { getRouter, router_CXEEREob_exports as t };

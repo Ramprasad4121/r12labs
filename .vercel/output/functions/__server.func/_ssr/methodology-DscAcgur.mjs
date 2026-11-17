@@ -1,47 +1,39 @@
 import { i as __toESM } from "../_runtime.mjs";
-import { S as require_jsx_runtime, Y as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { l as Shell } from "./shell-C62o14z1.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/methodology-Dknv20oq.js
+import { n as Shell } from "./shell-DenqLIPB.mjs";
+import { S as require_jsx_runtime, X as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/methodology-DscAcgur.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var PHASES = [
 	{
-		index: "01",
 		title: "Architecture",
 		body: "The protocol as it actually moves value: who calls, what is stored, and which external systems are trusted."
 	},
 	{
-		index: "02",
 		title: "Properties",
 		body: "The few statements that matter. Solvency, authorization, accounting, and the transitions that must be impossible."
 	},
 	{
-		index: "03",
 		title: "Specification",
 		body: "Those statements written tightly enough that a failure produces a trace. Vague goals do not verify."
 	},
 	{
-		index: "04",
 		title: "Model",
 		body: "The behavior we will reason about, including what is abstracted. An abstraction that hides the bug is called out, not hidden."
 	},
 	{
-		index: "05",
 		title: "Check",
 		body: "The property is proved or it fails. Tooling follows the property. We do not pick a tool and hope the question fits."
 	},
 	{
-		index: "06",
 		title: "Counterexamples",
 		body: "A failed property comes back as a trace. We read it before anyone calls it a bug, a model error, or a spec error."
 	},
 	{
-		index: "07",
 		title: "Fix",
 		body: "After the code or the spec changes, the same property is checked again. A green status from a different question does not count."
 	},
 	{
-		index: "08",
 		title: "Delivery",
 		body: "Scope, specifications, results, traces, findings from any audit work in the same engagement, and the limits in writing."
 	}
@@ -73,7 +65,7 @@ function MethodologyPage() {
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "mt-5 max-w-2xl text-lg text-muted",
-						children: "The order is fixed. Architecture, then the property, then a model, then a result you can argue with. A tool does not come first."
+						children: "Architecture, property, model, result. The tool follows the question."
 					})
 				]
 			}),
@@ -85,24 +77,21 @@ function MethodologyPage() {
 						const on = index === active;
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", {
 							className: "border-b border-rule",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 								type: "button",
-								className: `flex h-12 w-full items-center gap-4 text-left ${on ? "text-ink" : "text-muted"}`,
+								className: `flex h-12 w-full items-center text-left ${on ? "text-ink" : "text-muted"}`,
 								"aria-current": on ? "step" : void 0,
 								onClick: () => setActive(index),
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: `w-8 font-mono text-xs ${on ? "text-signal" : ""}`,
-									children: item.index
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: item.title })]
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: item.title })
 							})
-						}, item.index);
+						}, item.title);
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
 					className: "border border-rule bg-panel p-6 sm:p-10",
 					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-							className: "font-mono text-xs tracking-widest text-signal uppercase",
-							children: ["Step ", phase.index]
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-sm font-medium text-signal",
+							children: "Method"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 							className: "mt-3 text-4xl",
@@ -149,7 +138,7 @@ function MethodologyPage() {
 					className: "mx-auto max-w-6xl px-5 pb-14 sm:px-8",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "max-w-2xl text-muted",
-						children: "Verification proves only the specified properties, under the stated assumptions, in the model we actually built. That sentence is part of the delivery, not a footnote we hope nobody reads."
+						children: "Results apply only to the specified properties, stated assumptions, and model."
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 						to: "/contact",
 						className: "mt-8 inline-flex h-12 items-center bg-signal px-5 text-sm font-medium text-on-signal",
