@@ -1,4 +1,5 @@
-import { Link, createRootRoute, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
+import { Link, createRootRoute, HeadContent, Outlet, Scripts, useRouterState } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/react";
 import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
@@ -34,16 +35,19 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const path = useRouterState({ select: (state) => state.location.pathname });
   return (
     <html lang="en" className="antialiased" suppressHydrationWarning>
       <head>
         <HeadContent />
+        <link rel="canonical" href={`https://r12labs.xyz${path === "/" ? "/" : path}`} />
       </head>
       <body>
         <PreviewHostBridge />
         <AuthProvider>
           <Outlet />
         </AuthProvider>
+        <Analytics path={path} route={path} />
         <Scripts />
       </body>
     </html>
