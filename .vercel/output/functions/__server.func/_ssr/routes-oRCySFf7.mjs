@@ -1,0 +1,394 @@
+import { i as __toESM } from "../_runtime.mjs";
+import { S as require_jsx_runtime, Y as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
+import { c as Shell } from "./shell-DjWdkspT.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-oRCySFf7.js
+var import_react = /* @__PURE__ */ __toESM(require_react());
+var import_jsx_runtime = require_jsx_runtime();
+var PROPERTIES = [
+	{
+		id: "solvency",
+		name: "Solvency",
+		spec: "assets ≥ liabilities",
+		status: "holds",
+		trace: "Every modeled transition keeps the inequality. No violating state is reachable."
+	},
+	{
+		id: "auth",
+		name: "Authorization",
+		spec: "only admin changes parameters",
+		status: "holds",
+		trace: "A non-admin call is rejected before state changes. The admin edge is the only writer."
+	},
+	{
+		id: "accounting",
+		name: "Accounting",
+		spec: "shares × rate = assets",
+		status: "counterexample",
+		trace: "Illustrative trace, not a client finding: donate before the first deposit, then the next mint rounds to zero."
+	}
+];
+function ProofGraph() {
+	const [active, setActive] = (0, import_react.useState)(PROPERTIES[2].id);
+	const property = PROPERTIES.find((item) => item.id === active) ?? PROPERTIES[0];
+	const broken = property.status === "counterexample";
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figure", {
+		className: "border border-rule bg-panel",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figcaption", {
+			className: "flex items-center justify-between gap-3 border-b border-rule px-4 py-3 sm:px-5",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "font-mono text-xs tracking-widest text-muted uppercase",
+				children: "Property check"
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: `font-mono text-xs tracking-widest uppercase ${broken ? "text-signal" : "text-muted"}`,
+				children: broken ? "Counterexample" : "Holds"
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "px-3 py-4 sm:px-5",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+					viewBox: "0 0 560 250",
+					role: "img",
+					"aria-labelledby": "proof-title proof-desc",
+					className: "w-full",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("title", {
+							id: "proof-title",
+							children: "State transitions checked against a property"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("desc", {
+							id: "proof-desc",
+							children: [
+								property.spec,
+								". ",
+								property.trace
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, {
+							x1: 132,
+							y1: 70,
+							x2: 200,
+							y2: 70
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, {
+							x1: 292,
+							y1: 70,
+							x2: 360,
+							y2: 70
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, {
+							x1: 406,
+							y1: 108,
+							x2: 406,
+							y2: 156,
+							hot: broken
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
+							x: 40,
+							y: 40,
+							label: "Init"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
+							x: 200,
+							y: 40,
+							label: "Funded"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
+							x: 360,
+							y: 40,
+							label: "Active",
+							hot: true
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
+							x: 360,
+							y: 156,
+							label: broken ? "Violated" : "Settled",
+							hot: broken,
+							warn: broken
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+							x: 138,
+							y: 58,
+							fill: "#93a0b5",
+							fontSize: "11",
+							fontFamily: "IBM Plex Mono, ui-monospace, monospace",
+							children: "deposit"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+							x: 298,
+							y: 58,
+							fill: "#93a0b5",
+							fontSize: "11",
+							fontFamily: "IBM Plex Mono, ui-monospace, monospace",
+							children: "borrow"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+							x: 416,
+							y: 138,
+							fill: broken ? "#3d7eff" : "#93a0b5",
+							fontSize: "11",
+							fontFamily: "IBM Plex Mono, ui-monospace, monospace",
+							children: broken ? "break" : "repay"
+						})
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "mt-2 flex flex-wrap gap-2",
+					role: "tablist",
+					"aria-label": "Property",
+					children: PROPERTIES.map((item) => {
+						const on = item.id === active;
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							role: "tab",
+							"aria-selected": on,
+							className: `h-9 px-3 text-sm ${on ? "bg-signal text-on-signal" : "text-muted"}`,
+							onClick: () => setActive(item.id),
+							children: item.name
+						}, item.id);
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-4 font-mono text-sm text-ink",
+					children: property.spec
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "mt-2 text-sm text-muted",
+					children: property.trace
+				})
+			]
+		})]
+	});
+}
+function Node({ x, y, label, hot = false, warn = false }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("g", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
+		x,
+		y,
+		width: 80,
+		height: 60,
+		fill: "#05060a",
+		stroke: warn ? "#3d7eff" : hot ? "#e7eef8" : "#1a2130",
+		strokeWidth: warn ? 1.5 : 1
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+		x: x + 40,
+		y: y + 35,
+		textAnchor: "middle",
+		fill: warn ? "#3d7eff" : "#e7eef8",
+		fontSize: "13",
+		fontFamily: "IBM Plex Sans, sans-serif",
+		children: label
+	})] });
+}
+function Edge({ x1, y1, x2, y2, hot = false }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", {
+		x1,
+		y1,
+		x2,
+		y2,
+		stroke: hot ? "#3d7eff" : "#1a2130",
+		strokeWidth: hot ? 2 : 1.5
+	});
+}
+var VERIFY = [
+	["Invariants", "Balances, solvency, and conservation across every modeled transition."],
+	["Authorization", "Who may move funds, upgrade, or change a parameter."],
+	["Accounting", "Shares, rates, decimals, and rounding, as properties rather than examples."],
+	["State transitions", "Which moves are legal, and which must be unreachable."]
+];
+var CHAINS = [{
+	name: "EVM",
+	body: "Solidity specifications. Function properties. Arithmetic. Access control. SMT-style workflows where the property and the model support them."
+}, {
+	name: "Solana",
+	body: "Rust and Anchor properties. Account ownership, signer intent, and state transitions across instructions. Same standard of assumption and result."
+}];
+var STEPS = [
+	[
+		"01",
+		"Properties",
+		"Name what must hold before anyone picks a tool."
+	],
+	[
+		"02",
+		"Specification",
+		"Write it so a failed check is a trace, not a vibe."
+	],
+	[
+		"03",
+		"Verification",
+		"Prove the property, or return the counterexample."
+	],
+	[
+		"04",
+		"Limits",
+		"State the model, the assumptions, and what was not proved."
+	]
+];
+function Home() {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Shell, {
+		page: "Home",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "mx-auto grid max-w-6xl items-start gap-12 px-5 pt-14 pb-16 sm:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:pt-20",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "font-mono text-xs tracking-widest text-signal uppercase",
+						children: "Formal verification · EVM · Solana"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						className: "mt-4 max-w-xl text-5xl leading-[1.02] sm:text-6xl",
+						children: "Security through proof."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-5 max-w-xl text-lg text-muted",
+						children: "We help blockchain teams verify critical system properties and strengthen protocol security through formal verification and rigorous security engineering."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "mt-8 flex flex-col gap-3 sm:flex-row",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: "/contact",
+							className: "inline-flex h-12 items-center justify-center bg-signal px-5 text-sm font-medium text-on-signal",
+							children: "Discuss a verification project"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+							to: "/methodology",
+							className: "inline-flex h-12 items-center justify-center border border-rule px-5 text-sm",
+							children: "Explore our methodology"
+						})]
+					})
+				] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProofGraph, {})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+				className: "border-y border-rule",
+				"aria-label": "What we verify",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mx-auto max-w-6xl px-5 py-14 sm:px-8",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "text-3xl",
+						children: "What we verify"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dl", {
+						className: "mt-8 grid gap-px bg-rule sm:grid-cols-2",
+						children: VERIFY.map(([title, body]) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "bg-bone p-6",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("dt", {
+								className: "font-serif text-xl",
+								children: title
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("dd", {
+								className: "mt-2 text-muted",
+								children: body
+							})]
+						}, title))
+					})]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "mx-auto grid max-w-6xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.8fr_1.2fr]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "font-mono text-xs tracking-widest text-signal uppercase",
+						children: "Primary work"
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "mt-3 text-4xl",
+						children: "Formal verification, on both chains we take."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-4 text-muted",
+						children: "An audit looks for bugs. Verification asks whether a stated property holds in the model. We do both. Verification is the center of the firm."
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						to: "/formal-verification",
+						className: "mt-6 inline-flex text-sm text-signal",
+						children: "How verification is scoped"
+					})
+				] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "grid gap-px bg-rule sm:grid-cols-2",
+					children: CHAINS.map((chain) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("article", {
+						className: "bg-panel p-6",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+							className: "font-mono text-xs tracking-widest text-signal uppercase",
+							children: chain.name
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-3 text-muted",
+							children: chain.body
+						})]
+					}, chain.name))
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+				className: "border-y border-rule bg-panel",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mx-auto grid max-w-6xl gap-8 px-5 py-14 sm:px-8 md:grid-cols-[1fr_1fr] md:items-center",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "font-mono text-xs tracking-widest text-muted uppercase",
+							children: "Also in scope"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "mt-3 text-3xl",
+							children: "Security audits, when you need an adversary."
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "mt-4 text-muted",
+							children: "Manual review, fuzzing, and static analysis sit next to verification. They are not a proof. A passing test suite is not a proof. We say which one you are buying."
+						})
+					] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						to: "/services",
+						className: "inline-flex h-12 items-center border border-rule px-5 text-sm",
+						children: "Services"
+					}) })]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+				className: "mx-auto max-w-6xl px-5 py-16 sm:px-8",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-end justify-between gap-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "text-3xl",
+						children: "From a property to a result."
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						to: "/methodology",
+						className: "text-sm text-signal",
+						children: "Full method"
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ol", {
+					className: "mt-8 grid gap-px bg-rule sm:grid-cols-2 lg:grid-cols-4",
+					children: STEPS.map(([index, title, body]) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", {
+						className: "bg-bone p-5",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "font-mono text-xs text-signal",
+								children: index
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "mt-3 text-xl",
+								children: title
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "mt-2 text-sm text-muted",
+								children: body
+							})
+						]
+					}, index))
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+				className: "border-t border-rule",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "mx-auto grid max-w-6xl gap-6 px-5 py-16 sm:px-8 md:grid-cols-[1.2fr_0.8fr] md:items-end",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "max-w-xl text-4xl",
+						children: "A proof covers the properties you wrote down. Nothing else."
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "mt-4 max-w-xl text-muted",
+						children: "Results are scoped to a model and a set of assumptions. If that is the engagement you want, start with the property that must not fail."
+					})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
+						to: "/contact",
+						className: "inline-flex h-12 w-fit items-center bg-signal px-5 text-sm font-medium text-on-signal",
+						children: "Discuss a verification project"
+					})]
+				})
+			})
+		]
+	});
+}
+//#endregion
+export { Home as component };

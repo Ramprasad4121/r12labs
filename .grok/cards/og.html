@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>R12 Labs</title>
+<style>
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("./IBMPlexSans-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("./IBMPlexSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: block;
+}
+
+html, body {
+  margin: 0;
+  width: 1200px;
+  height: 630px;
+  background: #05060a;
+  overflow: hidden;
+}
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.mark {
+  width: 120px;
+  height: 120px;
+  display: block;
+}
+.word {
+  height: 132px;
+  width: auto;
+  display: block;
+  overflow: visible;
+}
+.word text {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 600;
+  font-size: 1000px;
+  letter-spacing: 40px;
+  font-synthesis: none;
+}
+.tag {
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #e7eef8;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+</style>
+</head>
+<body>
+  <main class="lockup">
+    <img class="mark" src="../../public/favicon.svg" alt="">
+    <svg class="word" xmlns="http://www.w3.org/2000/svg" viewBox="0 -28 4490 768" role="img" aria-label="R12 Labs">
+  <g fill="#e7eef8" transform="translate(0 720) scale(1 -1)">
+    <g transform="translate(0 0)"><path d="M214 269V0H82V698H397Q461 698 507.0 671.5Q553 645 578.0 596.5Q603 548 603 482Q603 411 570.5 358.5Q538 306 473 284L616 0H469L339 269ZM214 380H384Q410 380 428.0 389.5Q446 399 456.0 416.5Q466 434 466 459V505Q466 531 456.0 548.0Q446 565 428.0 574.0Q410 583 384 583H214Z"/></g><g transform="translate(704 0)"><path d="M570 0H92V107H282V603H274L122 423L40 492L212 698H413V107H570Z"/></g><g transform="translate(1344 0)"><path d="M546 111V0H62V122L281 314Q337 362 363.0 402.0Q389 442 389 488V501Q389 547 359.0 571.5Q329 596 286 596Q233 596 204.5 565.5Q176 535 164 492L50 536Q65 583 96.0 622.0Q127 661 177.0 685.5Q227 710 297 710Q371 710 422.5 683.0Q474 656 501.0 609.5Q528 563 528 502Q528 444 504.5 398.0Q481 352 440.5 312.0Q400 272 352 232L205 111Z"/></g>
+  </g>
+  <text x="2180" y="720" fill="#93a0b5">Labs</text>
+</svg>
+    <p class="tag">Audits for EVM and Solana.</p>
+  </main>
+</body>
+</html>
