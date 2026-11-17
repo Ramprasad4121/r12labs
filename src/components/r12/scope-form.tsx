@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { cloneElement, isValidElement, useEffect, useId, useState } from "react";
 import { INQUIRY_EMAIL, inquiryMailto, planningRange } from "@/lib/r12/content";
 import { briefText, loadScopes, saveScope, scopeSchema, type ScopeInput, type StoredScope } from "@/lib/r12/scopes";
 
@@ -230,14 +230,30 @@ function Field({
 }: {
   label: string;
   error?: string;
-  children: React.ReactNode;
+  children: React.ReactElement<Record<string, unknown>>;
 }) {
+  const id = useId();
+  const errorId = `${id}-error`;
+  const control = isValidElement(children)
+    ? cloneElement(children, {
+        id,
+        "aria-invalid": error ? true : undefined,
+        "aria-describedby": error ? errorId : undefined,
+      })
+    : children;
+
   return (
-    <label className="block">
-      <span className="font-mono text-[11px] tracking-widest text-muted uppercase">{label}</span>
-      <span className="mt-2 block">{children}</span>
-      {error ? <span className="mt-1 block text-sm text-signal">{error}</span> : null}
-    </label>
+    <div>
+      <label htmlFor={id} className="font-mono text-[11px] tracking-widest text-muted uppercase">
+        {label}
+      </label>
+      <div className="mt-2">{control}</div>
+      {error ? (
+        <p id={errorId} className="mt-1 text-sm text-signal">
+          {error}
+        </p>
+      ) : null}
+    </div>
   );
 }
 
@@ -252,10 +268,14 @@ function Select<T extends string>({
   options: readonly T[];
   onChange: (value: T) => void;
 }) {
+  const id = useId();
   return (
-    <label className="block">
-      <span className="font-mono text-[11px] tracking-widest text-muted uppercase">{label}</span>
+    <div>
+      <label htmlFor={id} className="font-mono text-[11px] tracking-widest text-muted uppercase">
+        {label}
+      </label>
       <select
+        id={id}
         className={`${inputClass} mt-2`}
         value={value}
         onChange={(event) => onChange(event.target.value as T)}
@@ -266,6 +286,6 @@ function Select<T extends string>({
           </option>
         ))}
       </select>
-    </label>
+    </div>
   );
 }

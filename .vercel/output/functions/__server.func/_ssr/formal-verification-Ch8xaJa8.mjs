@@ -1,6 +1,6 @@
 import { S as require_jsx_runtime, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { c as Shell } from "./shell-DjWdkspT.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/formal-verification-BqiDu7R_.js
+import { l as Shell } from "./shell-C62o14z1.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/formal-verification-Ch8xaJa8.js
 var import_jsx_runtime = require_jsx_runtime();
 var EVM = [
 	"Solidity specifications for the functions that move value.",

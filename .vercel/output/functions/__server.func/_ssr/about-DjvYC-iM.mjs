@@ -1,6 +1,6 @@
 import { S as require_jsx_runtime, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { c as Shell, n as Kicker, r as LINKS } from "./shell-DjWdkspT.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/about-p8hNwDko.js
+import { i as LINKS, l as Shell, r as Kicker } from "./shell-C62o14z1.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/about-DjvYC-iM.js
 var import_jsx_runtime = require_jsx_runtime();
 function AboutPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Shell, {
@@ -107,7 +107,7 @@ function AboutPage() {
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 							className: "mt-4 max-w-2xl text-muted",
-							children: "Private findings stay with the team that commissioned the review. This site does not publish them, and it does not yet publish a disclosure address. Until that address is approved, do not send vulnerability reports through the scope form and expect a security response. The form is for scoping a review."
+							children: "Private findings stay with the team that commissioned the review. This site does not publish them. The address on the contact page is for new work, not a disclosure program. Do not send live exploit details there, or through the scope form, and expect a security response."
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Link, {
 							to: "/contact",

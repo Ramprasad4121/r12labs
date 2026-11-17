@@ -1,34 +1,142 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { S as require_jsx_runtime, Y as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { c as Shell } from "./shell-DjWdkspT.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/routes-oRCySFf7.js
+import { l as Shell } from "./shell-C62o14z1.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/routes-DRaukF83.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
+var BOX_W = 108;
+var BOX_H = 52;
+function placed(index, y) {
+	return {
+		x: 20 + index * 168,
+		y
+	};
+}
+function across(from, y, label, hot = false) {
+	const x1 = placed(from, y).x + BOX_W;
+	const x2 = placed(from + 1, y).x;
+	const mid = y + BOX_H / 2;
+	return {
+		x1,
+		y1: mid,
+		x2,
+		y2: mid,
+		label,
+		lx: x1 + 8,
+		ly: mid - 10,
+		hot
+	};
+}
+function down(from, label, hot = false) {
+	const top = placed(from, 36);
+	const bottom = placed(from, 150);
+	const x = top.x + BOX_W / 2;
+	return {
+		x1: x,
+		y1: top.y + BOX_H,
+		x2: x,
+		y2: bottom.y,
+		label,
+		lx: x + 10,
+		ly: top.y + BOX_H + 28,
+		hot
+	};
+}
 var PROPERTIES = [
 	{
 		id: "solvency",
 		name: "Solvency",
 		spec: "assets ≥ liabilities",
 		status: "holds",
-		trace: "Every modeled transition keeps the inequality. No violating state is reachable."
+		trace: "Illustrative sketch, not a discharged proof. Deposit, borrow, and repay each keep assets at least equal to liabilities.",
+		nodes: [
+			{
+				...placed(0, 36),
+				label: "Init"
+			},
+			{
+				...placed(1, 36),
+				label: "Funded"
+			},
+			{
+				...placed(2, 36),
+				label: "Active"
+			},
+			{
+				...placed(3, 36),
+				label: "Settled"
+			}
+		],
+		edges: [
+			across(0, 36, "deposit"),
+			across(1, 36, "borrow"),
+			across(2, 36, "repay")
+		]
 	},
 	{
 		id: "auth",
 		name: "Authorization",
-		spec: "only admin changes parameters",
+		spec: "only admin writes parameters",
 		status: "holds",
-		trace: "A non-admin call is rejected before state changes. The admin edge is the only writer."
+		trace: "Illustrative sketch. The admin edge writes. The other-caller edge is rejected and does not change state.",
+		nodes: [
+			{
+				...placed(0, 36),
+				label: "Idle"
+			},
+			{
+				...placed(1, 36),
+				label: "Pending"
+			},
+			{
+				...placed(2, 36),
+				label: "Written"
+			},
+			{
+				...placed(1, 150),
+				label: "Rejected"
+			}
+		],
+		edges: [
+			across(0, 36, "propose"),
+			across(1, 36, "admin"),
+			down(1, "other")
+		]
 	},
 	{
 		id: "accounting",
 		name: "Accounting",
 		spec: "shares × rate = assets",
 		status: "counterexample",
-		trace: "Illustrative trace, not a client finding: donate before the first deposit, then the next mint rounds to zero."
+		trace: "Illustrative trace, not a client finding. Mint 1 share into an empty vault, donate assets to inflate the rate, and the next deposit rounds down to zero shares.",
+		nodes: [
+			{
+				...placed(0, 36),
+				label: "Empty"
+			},
+			{
+				...placed(1, 36),
+				label: "Seeded"
+			},
+			{
+				...placed(2, 36),
+				label: "Inflated"
+			},
+			{
+				...placed(2, 150),
+				label: "Zero",
+				bad: true
+			}
+		],
+		edges: [
+			across(0, 36, "mint 1"),
+			across(1, 36, "donate"),
+			down(2, "deposit", true)
+		]
 	}
 ];
 function ProofGraph() {
-	const [active, setActive] = (0, import_react.useState)(PROPERTIES[2].id);
+	const [active, setActive] = (0, import_react.useState)(PROPERTIES[0].id);
 	const property = PROPERTIES.find((item) => item.id === active) ?? PROPERTIES[0];
 	const broken = property.status === "counterexample";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("figure", {
@@ -37,7 +145,7 @@ function ProofGraph() {
 			className: "flex items-center justify-between gap-3 border-b border-rule px-4 py-3 sm:px-5",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 				className: "font-mono text-xs tracking-widest text-muted uppercase",
-				children: "Property check"
+				children: "Property sketch"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 				className: `font-mono text-xs tracking-widest uppercase ${broken ? "text-signal" : "text-muted"}`,
 				children: broken ? "Counterexample" : "Holds"
@@ -46,14 +154,14 @@ function ProofGraph() {
 			className: "px-3 py-4 sm:px-5",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
-					viewBox: "0 0 560 250",
+					viewBox: "0 0 680 230",
 					role: "img",
 					"aria-labelledby": "proof-title proof-desc",
 					className: "w-full",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("title", {
 							id: "proof-title",
-							children: "State transitions checked against a property"
+							children: "Sketch of states checked against a property"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("desc", {
 							id: "proof-desc",
@@ -63,84 +171,17 @@ function ProofGraph() {
 								property.trace
 							]
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, {
-							x1: 132,
-							y1: 70,
-							x2: 200,
-							y2: 70
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, {
-							x1: 292,
-							y1: 70,
-							x2: 360,
-							y2: 70
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, {
-							x1: 406,
-							y1: 108,
-							x2: 406,
-							y2: 156,
-							hot: broken
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
-							x: 40,
-							y: 40,
-							label: "Init"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
-							x: 200,
-							y: 40,
-							label: "Funded"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
-							x: 360,
-							y: 40,
-							label: "Active",
-							hot: true
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, {
-							x: 360,
-							y: 156,
-							label: broken ? "Violated" : "Settled",
-							hot: broken,
-							warn: broken
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
-							x: 138,
-							y: 58,
-							fill: "#93a0b5",
-							fontSize: "11",
-							fontFamily: "IBM Plex Mono, ui-monospace, monospace",
-							children: "deposit"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
-							x: 298,
-							y: 58,
-							fill: "#93a0b5",
-							fontSize: "11",
-							fontFamily: "IBM Plex Mono, ui-monospace, monospace",
-							children: "borrow"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
-							x: 416,
-							y: 138,
-							fill: broken ? "#3d7eff" : "#93a0b5",
-							fontSize: "11",
-							fontFamily: "IBM Plex Mono, ui-monospace, monospace",
-							children: broken ? "break" : "repay"
-						})
+						property.edges.map((edge) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Edge, { ...edge }, `${edge.label}-${edge.x1}`)),
+						property.nodes.map((node) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Node, { ...node }, `${node.label}-${node.x}-${node.y}`))
 					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "mt-2 flex flex-wrap gap-2",
-					role: "tablist",
-					"aria-label": "Property",
 					children: PROPERTIES.map((item) => {
 						const on = item.id === active;
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							type: "button",
-							role: "tab",
-							"aria-selected": on,
+							"aria-pressed": on,
 							className: `h-9 px-3 text-sm ${on ? "bg-signal text-on-signal" : "text-muted"}`,
 							onClick: () => setActive(item.id),
 							children: item.name
@@ -159,34 +200,41 @@ function ProofGraph() {
 		})]
 	});
 }
-function Node({ x, y, label, hot = false, warn = false }) {
+function Node({ x, y, label, bad = false }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("g", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
 		x,
 		y,
-		width: 80,
-		height: 60,
+		width: BOX_W,
+		height: BOX_H,
 		fill: "#05060a",
-		stroke: warn ? "#3d7eff" : hot ? "#e7eef8" : "#1a2130",
-		strokeWidth: warn ? 1.5 : 1
+		stroke: bad ? "#3d7eff" : "#e7eef8",
+		strokeWidth: bad ? 1.5 : 1
 	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
-		x: x + 40,
-		y: y + 35,
+		x: x + BOX_W / 2,
+		y: y + 32,
 		textAnchor: "middle",
-		fill: warn ? "#3d7eff" : "#e7eef8",
-		fontSize: "13",
-		fontFamily: "IBM Plex Sans, sans-serif",
+		fill: bad ? "#3d7eff" : "#e7eef8",
+		fontSize: "14",
+		fontFamily: "IBM Plex Mono, ui-monospace, monospace",
 		children: label
 	})] });
 }
-function Edge({ x1, y1, x2, y2, hot = false }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", {
+function Edge({ x1, y1, x2, y2, label, lx, ly, hot = false }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("g", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("line", {
 		x1,
 		y1,
 		x2,
 		y2,
-		stroke: hot ? "#3d7eff" : "#1a2130",
+		stroke: hot ? "#3d7eff" : "#93a0b5",
 		strokeWidth: hot ? 2 : 1.5
-	});
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("text", {
+		x: lx,
+		y: ly,
+		fill: hot ? "#3d7eff" : "#93a0b5",
+		fontSize: "12",
+		fontFamily: "IBM Plex Mono, ui-monospace, monospace",
+		children: label
+	})] });
 }
 var VERIFY = [
 	["Invariants", "Balances, solvency, and conservation across every modeled transition."],

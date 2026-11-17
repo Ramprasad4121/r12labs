@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { S as require_jsx_runtime, Y as require_react, b as Link, p as useRouterState } from "../_libs/@tanstack/react-router+[...].mjs";
 import { n as Menu, t as X } from "../_libs/lucide-react.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/shell-DjWdkspT.js
+//#region node_modules/.nitro/vite/services/ssr/assets/shell-C62o14z1.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var NAV = [
@@ -199,6 +199,13 @@ var QUESTIONS = [
 	"What did the last review miss, or never cover?",
 	"What is explicitly out of scope?"
 ];
+var INQUIRY_EMAIL = "ramprasadgoud34@gmail.com";
+function inquiryMailto(subject, body) {
+	const params = new URLSearchParams();
+	params.set("subject", subject);
+	if (body) params.set("body", body);
+	return `mailto:${INQUIRY_EMAIL}?${params.toString()}`;
+}
 var LINKS = {
 	principal: "https://www.ramprasadgoud.dev",
 	writing: "https://www.ramprasadgoud.dev/blog",
@@ -303,6 +310,7 @@ function Header() {
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 							to: item.to,
 							className: `flex h-14 items-center justify-between font-serif text-2xl ${active ? "text-ink" : "text-muted"}`,
+							"aria-current": active ? "page" : void 0,
 							children: [item.label, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "font-mono text-xs tracking-widest",
 								children: active ? "●" : "→"
@@ -400,4 +408,4 @@ function Kicker({ index, children }) {
 	});
 }
 //#endregion
-export { PREP as a, Shell as c, OFFERINGS as i, planningRange as l, Kicker as n, QUESTIONS as o, LINKS as r, REFUSALS as s, CLASSES as t };
+export { OFFERINGS as a, REFUSALS as c, planningRange as d, LINKS as i, Shell as l, INQUIRY_EMAIL as n, PREP as o, Kicker as r, QUESTIONS as s, CLASSES as t, inquiryMailto as u };

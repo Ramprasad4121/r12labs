@@ -30,7 +30,7 @@ export function ClassBrowser() {
         <FilterRow label="Severity" value={severity} options={SEVERITIES} onChange={setSeverity} />
       </div>
       <p className="mt-3 font-mono text-xs tracking-widest text-muted uppercase">
-        {rows.length} {rows.length === 1 ? "class" : "classes"} on the bench
+        {rows.length} {rows.length === 1 ? "class" : "classes"} in this set
       </p>
       <ul className="mt-3 border-t border-rule">
         {rows.length === 0 ? (
@@ -118,6 +118,7 @@ function FilterRow<T extends string>({
             type="button"
             className={`h-9 px-3 text-sm ${active ? "bg-signal text-on-signal" : "text-muted hover:text-ink"}`}
             aria-pressed={active}
+            aria-label={`${label} ${option}`}
             onClick={() => onChange(option)}
           >
             {option}

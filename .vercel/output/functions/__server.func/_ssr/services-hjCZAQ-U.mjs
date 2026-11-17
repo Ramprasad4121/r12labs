@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { S as require_jsx_runtime, Y as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { c as Shell, i as OFFERINGS, n as Kicker, s as REFUSALS } from "./shell-DjWdkspT.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/services-B1km1HFa.js
+import { a as OFFERINGS, c as REFUSALS, l as Shell, r as Kicker } from "./shell-C62o14z1.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/services-hjCZAQ-U.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var COMPARE = [

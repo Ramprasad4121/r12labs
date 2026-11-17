@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { S as require_jsx_runtime, Y as require_react } from "../_libs/@tanstack/react-router+[...].mjs";
-import { c as Shell, r as LINKS, t as CLASSES } from "./shell-DjWdkspT.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/research-DkizPeu_.js
+import { i as LINKS, l as Shell, t as CLASSES } from "./shell-C62o14z1.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/research-CP60Ao0-.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 function severityTone(severity) {
@@ -57,7 +57,7 @@ function ClassBrowser() {
 				rows.length,
 				" ",
 				rows.length === 1 ? "class" : "classes",
-				" on the bench"
+				" in this set"
 			]
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
@@ -146,6 +146,7 @@ function FilterRow({ label, value, options, onChange }) {
 				type: "button",
 				className: `h-9 px-3 text-sm ${active ? "bg-signal text-on-signal" : "text-muted hover:text-ink"}`,
 				"aria-pressed": active,
+				"aria-label": `${label} ${option}`,
 				onClick: () => onChange(option),
 				children: option
 			}, option);

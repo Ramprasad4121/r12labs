@@ -1,7 +1,7 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { S as require_jsx_runtime, Y as require_react, b as Link } from "../_libs/@tanstack/react-router+[...].mjs";
-import { c as Shell } from "./shell-DjWdkspT.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/methodology-4ud_DJAn.js
+import { l as Shell } from "./shell-C62o14z1.mjs";
+//#region node_modules/.nitro/vite/services/ssr/assets/methodology-Dknv20oq.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var PHASES = [

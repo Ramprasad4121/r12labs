@@ -58,7 +58,7 @@ function Header() {
             to="/contact"
             className="inline-flex h-11 items-center bg-signal px-4 text-sm font-medium text-on-signal"
           >
-            Discuss a project
+            Discuss a verification project
           </Link>
         </nav>
         <button
@@ -86,6 +86,7 @@ function Header() {
                   <Link
                     to={item.to}
                     className={`flex h-14 items-center justify-between font-serif text-2xl ${active ? "text-ink" : "text-muted"}`}
+                    aria-current={active ? "page" : undefined}
                   >
                     {item.label}
                     <span className="font-mono text-xs tracking-widest">{active ? "●" : "→"}</span>

@@ -72,9 +72,9 @@ function AboutPage() {
           <h2 className="font-serif text-3xl">Responsible disclosure</h2>
           <p className="mt-4 max-w-2xl text-muted">
             Private findings stay with the team that commissioned the review. This site does not
-            publish them, and it does not yet publish a disclosure address. Until that address is
-            approved, do not send vulnerability reports through the scope form and expect a
-            security response. The form is for scoping a review.
+            publish them. The address on the contact page is for new work, not a disclosure
+            program. Do not send live exploit details there, or through the scope form, and expect
+            a security response.
           </p>
           <Link
             to="/contact"

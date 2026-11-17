@@ -1,8 +1,8 @@
 import { i as __toESM } from "../_runtime.mjs";
 import { S as require_jsx_runtime, Y as require_react } from "../_libs/@tanstack/react-router+[...].mjs";
-import { a as PREP, c as Shell, l as planningRange, n as Kicker, o as QUESTIONS } from "./shell-DjWdkspT.mjs";
+import { d as planningRange, l as Shell, n as INQUIRY_EMAIL, o as PREP, r as Kicker, s as QUESTIONS, u as inquiryMailto } from "./shell-C62o14z1.mjs";
 import { a as string, i as object, t as _enum } from "../_libs/zod.mjs";
-//#region node_modules/.nitro/vite/services/ssr/assets/contact-BmLhVISg.js
+//#region node_modules/.nitro/vite/services/ssr/assets/contact-BtFIEilM.js
 var import_react = /* @__PURE__ */ __toESM(require_react());
 var import_jsx_runtime = require_jsx_runtime();
 var scopeSchema = object({
@@ -290,9 +290,13 @@ function ScopeForm() {
 							className: "h-12 bg-signal text-sm font-medium text-on-signal",
 							children: "Save brief"
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 							className: "text-sm text-muted",
-							children: "Saving does not send this brief. It stays in this browser until you copy it or open it in your own mail client."
+							children: [
+								"Saving stores a draft on this device. It does not email ",
+								INQUIRY_EMAIL,
+								". After you save, open the brief in your mail client and send it yourself."
+							]
 						})
 					]
 				}),
@@ -320,20 +324,20 @@ function ScopeForm() {
 								saved.chain,
 								" · ",
 								saved.surface,
-								". This page did not deliver it."
+								". Nothing was emailed."
 							]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "mt-4 flex flex-col gap-3 sm:flex-row",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+								className: "inline-flex h-11 items-center justify-center bg-signal px-4 text-sm font-medium text-on-signal",
+								href: inquiryMailto(`R12 Labs scope brief ${saved.id}`, briefText(saved)),
+								children: "Email this brief"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 								type: "button",
 								className: "h-11 border border-rule px-4 text-sm",
 								onClick: () => copy(saved),
 								children: copied ? "Copied" : "Copy brief"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
-								className: "inline-flex h-11 items-center justify-center bg-signal px-4 text-sm font-medium text-on-signal",
-								href: `mailto:?subject=${encodeURIComponent(`R12 Labs scope brief ${saved.id}`)}&body=${encodeURIComponent(briefText(saved))}`,
-								children: "Open in your mail client"
 							})]
 						}),
 						copyError ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
@@ -379,40 +383,46 @@ function ScopeForm() {
 }
 var inputClass = "h-12 w-full border border-rule bg-bone px-3 font-serif text-ink outline-none focus:border-ink";
 function Field({ label, error, children }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-		className: "block",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "font-mono text-[11px] tracking-widest text-muted uppercase",
-				children: label
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "mt-2 block",
-				children
-			}),
-			error ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "mt-1 block text-sm text-signal",
-				children: error
-			}) : null
-		]
-	});
-}
-function Select({ label, value, options, onChange }) {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-		className: "block",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+	const id = (0, import_react.useId)();
+	const errorId = `${id}-error`;
+	const control = (0, import_react.isValidElement)(children) ? (0, import_react.cloneElement)(children, {
+		id,
+		"aria-invalid": error ? true : void 0,
+		"aria-describedby": error ? errorId : void 0
+	}) : children;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+			htmlFor: id,
 			className: "font-mono text-[11px] tracking-widest text-muted uppercase",
 			children: label
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
-			className: `${inputClass} mt-2`,
-			value,
-			onChange: (event) => onChange(event.target.value),
-			children: options.map((option) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
-				value: option,
-				children: option
-			}, option))
-		})]
-	});
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "mt-2",
+			children: control
+		}),
+		error ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			id: errorId,
+			className: "mt-1 text-sm text-signal",
+			children: error
+		}) : null
+	] });
+}
+function Select({ label, value, options, onChange }) {
+	const id = (0, import_react.useId)();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+		htmlFor: id,
+		className: "font-mono text-[11px] tracking-widest text-muted uppercase",
+		children: label
+	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("select", {
+		id,
+		className: `${inputClass} mt-2`,
+		value,
+		onChange: (event) => onChange(event.target.value),
+		children: options.map((option) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
+			value: option,
+			children: option
+		}, option))
+	})] });
 }
 function ContactPage() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Shell, {
@@ -429,9 +439,23 @@ function ContactPage() {
 						className: "mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl",
 						children: "Discuss a verification project."
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 						className: "mt-5 max-w-2xl text-lg text-muted",
-						children: "Use this for a formal verification, a security audit, a research conversation, or a technical partnership. No public inbox is configured. Saving a brief keeps it in this browser. It is not delivered. Copy it, or open it in your own mail client and choose the recipient."
+						children: [
+							"For a formal verification, a security audit, research, or a technical partnership, email",
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+								className: "text-ink underline",
+								href: `mailto:${INQUIRY_EMAIL}`,
+								children: INQUIRY_EMAIL
+							}),
+							". You can also draft a scope brief below and open it in your mail client. Saving a brief keeps a copy in this browser only. This page does not send it."
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("a", {
+						className: "mt-8 inline-flex h-12 items-center bg-signal px-5 text-sm font-medium text-on-signal",
+						href: inquiryMailto("R12 Labs inquiry"),
+						children: "Email R12 Labs"
 					})
 				]
 			}),
@@ -451,7 +475,7 @@ function ContactPage() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ol", {
 							className: "mt-4 space-y-3 text-muted",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "1. You send the brief. We do not receive it from this page." }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "1. You send the email. Saving a draft here does not deliver it." }),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "2. If the surface is in scope, we reply with what is in and what is out." }),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "3. The week range in the form is a planning hint, not a quote or a start date." })
 							]
