@@ -70,14 +70,6 @@ function Home() {
               <p className="mt-3 max-w-md font-serif text-2xl leading-tight sm:text-3xl">
                 It states the property, the model, and the conditions under which it holds.
               </p>
-              <a
-                href="https://unsplash.com/@alexkixa?utm_source=r12labs&utm_medium=referral"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-5 inline-block text-xs text-on-signal/60 hover:text-on-signal"
-              >
-                Photo by Alexandre Debiève / Unsplash
-              </a>
             </figcaption>
           </figure>
         </div>
