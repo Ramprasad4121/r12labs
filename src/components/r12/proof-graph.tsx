@@ -124,7 +124,7 @@ export function ProofGraph() {
                 key={item.id}
                 type="button"
                 aria-pressed={on}
-            className={`h-9 px-3 text-sm ${on ? "bg-on-signal text-ink" : "text-on-signal/65 hover:text-on-signal"}`}
+                className={`h-9 px-3 text-sm ${on ? "bg-on-signal text-ink" : "text-on-signal/65 hover:text-on-signal"}`}
                 onClick={() => setActive(item.id)}
               >
                 {item.name}

@@ -6,8 +6,6 @@ export type BugClass = {
   title: string;
   chain: Chain;
   severity: Severity;
-  surface: string;
-  summary: string;
   assumption: string;
   impact: string;
   proof: string;
@@ -21,9 +19,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Stale oracle read",
     chain: "EVM",
     severity: "High",
-    surface: "Price feeds",
-    summary:
-      "latestRoundData() is treated as a price. No heartbeat, no min answer, no check that the round is complete.",
     assumption: "The latest round is a current, complete price.",
     impact: "Borrowing or minting can clear against a price the feed no longer stands behind.",
     proof:
@@ -37,9 +32,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Substituted oracle account",
     chain: "Solana",
     severity: "Critical",
-    surface: "Lending programs",
-    summary:
-      "The program trusts an account because it has the right shape, not because it is the oracle the protocol deployed.",
     assumption: "Any account with the oracle layout is the protocol’s oracle.",
     impact: "An attacker-set price can back a borrow the real feed would refuse.",
     proof:
@@ -53,9 +45,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Upgrade layout collision",
     chain: "EVM",
     severity: "High",
-    surface: "Proxies",
-    summary:
-      "A new variable lands on top of an old one, or an initializer can run again after the upgrade.",
     assumption: "Appending a variable, or shipping a new implementation, leaves old state meaningful.",
     impact: "An admin, a pause flag, or an accounting slot can decode as something else after the upgrade.",
     proof:
@@ -68,9 +57,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "CPI with a borrowed signer",
     chain: "Solana",
     severity: "High",
-    surface: "Anchor programs",
-    summary:
-      "A CPI signs with a PDA the attacker can aim, or it forwards remaining accounts the program never validated.",
     assumption: "A PDA signer implies the destination account is the one the program intended.",
     impact: "Tokens or mint authority can move because the seeds match, not because the target is correct.",
     proof:
@@ -83,9 +69,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Share inflation",
     chain: "EVM",
     severity: "Medium",
-    surface: "Vaults",
-    summary:
-      "The first depositor, or a direct token donation, moves the exchange rate so the next depositor’s shares round to zero.",
     assumption: "The exchange rate stays fair when the vault is empty or nearly empty.",
     impact: "A later depositor can receive zero shares while the donated assets stay with the attacker.",
     proof:
@@ -98,9 +81,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Session key without a fence",
     chain: "Agents",
     severity: "High",
-    surface: "Smart wallets",
-    summary:
-      "A session key can call any contract, for any amount, until a timestamp. The policy lives in a prompt.",
     assumption: "The agent will only call what it was told to call.",
     impact: "The key can spend up to the wallet, not up to a cap, against contracts nobody allowlisted.",
     proof:
@@ -114,9 +94,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Cross-chain replay",
     chain: "Cross-chain",
     severity: "High",
-    surface: "Bridges and messaging",
-    summary:
-      "A message is valid, and it is valid again. Nonce, chain id, or source address was never bound into the proof.",
     assumption: "A valid attestation can be consumed only once, on one domain.",
     impact: "The same payload can mint, release, or execute again.",
     proof:
@@ -129,9 +106,6 @@ export const CLASSES: readonly BugClass[] = [
     title: "Fail-open on a dead feed",
     chain: "Agents",
     severity: "High",
-    surface: "Agent payments",
-    summary:
-      "An agent is allowed to pay when the price, the policy oracle, or the kill switch cannot be read.",
     assumption: "A failed read is a safe default, or a rare case that can be ignored.",
     impact: "Funds move because the check errored, not because the policy allowed it.",
     proof:

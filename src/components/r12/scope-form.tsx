@@ -1,26 +1,7 @@
 import { cloneElement, useId, useState } from "react";
-import { INQUIRY_EMAIL } from "@/lib/r12/content";
+import { INQUIRY_EMAIL } from "@/lib/r12/site";
 import { sendContactInquiry } from "@/lib/r12/contact";
-
-const ENGAGEMENTS = [
-  "Formal verification",
-  "Security review",
-  "Verification strategy",
-] as const;
-
-const CODE_STATES = [
-  "Public repository",
-  "Private repository",
-  "Still in design",
-  "Prefer to discuss first",
-] as const;
-
-const TIMEFRAMES = [
-  "Planning the work",
-  "Within four weeks",
-  "One to two months",
-  "No fixed window",
-] as const;
+import { CODE_STATES, ENGAGEMENTS, TIMEFRAMES } from "@/lib/r12/inquiry";
 
 type Inquiry = {
   name: string;
@@ -66,8 +47,12 @@ export function ScopeForm() {
     if (!values.name.trim()) next.name = "Enter your name.";
     if (!/^\S+@\S+\.\S+$/.test(values.email)) next.email = "Enter a valid work email.";
     if (!values.organization.trim()) next.organization = "Enter the company or protocol.";
-    if (!values.engagement) next.engagement = "Choose one.";
     if (!values.property.trim()) next.property = "Describe the property or risk.";
+    if (values.engagement === "") {
+      next.engagement = "Choose one.";
+      setErrors(next);
+      return;
+    }
     setErrors(next);
     if (Object.keys(next).length) return;
 
@@ -77,7 +62,7 @@ export function ScopeForm() {
       const result = await sendContactInquiry({
         data: {
           ...values,
-          engagement: values.engagement as Exclude<Inquiry["engagement"], "">,
+          engagement: values.engagement,
           codeState: values.codeState || undefined,
           timing: values.timing || undefined,
         },

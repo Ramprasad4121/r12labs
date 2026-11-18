@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { CLASSES, type Chain, type Severity } from "@/lib/r12/content";
+import { CLASSES, type Chain, type Severity } from "@/lib/r12/classes";
 
 const CHAINS: Array<Chain | "All"> = ["All", "EVM", "Solana", "Cross-chain", "Agents"];
 const SEVERITIES: Array<Severity | "All"> = ["All", "Critical", "High", "Medium"];
@@ -128,7 +128,7 @@ function FilterRow<T extends string>({
   );
 }
 
-function severityTone(severity: Severity): "signal" | "ink" | "muted" {
+function severityTone(severity: Severity): "signal" | "muted" {
   if (severity === "Critical" || severity === "High") return "signal";
   return "muted";
 }
@@ -138,10 +138,9 @@ function Chip({
   tone = "muted",
 }: {
   children: React.ReactNode;
-  tone?: "signal" | "ink" | "muted";
+  tone?: "signal" | "muted";
 }) {
-  const toneClass =
-    tone === "signal" ? "text-signal" : tone === "ink" ? "text-ink" : "text-muted";
+  const toneClass = tone === "signal" ? "text-signal" : "text-muted";
   return (
     <span className={`border border-rule px-2 py-1 font-mono text-[11px] tracking-widest uppercase ${toneClass}`}>
       {children}

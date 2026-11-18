@@ -62,7 +62,7 @@ const CLIENT = [
 
 function MethodologyPage() {
   const [active, setActive] = useState(0);
-  const phase = PHASES[active] ?? PHASES[0];
+  const phase = PHASES[active];
 
   return (
     <Shell>

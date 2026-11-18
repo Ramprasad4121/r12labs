@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ClassBrowser } from "@/components/r12/class-browser";
 import { Shell } from "@/components/r12/shell";
-import { LINKS } from "@/lib/r12/content";
+import { LINKS } from "@/lib/r12/site";
 
 export const Route = createFileRoute("/research")({
   head: () => ({

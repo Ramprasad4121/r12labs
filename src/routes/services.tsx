@@ -1,7 +1,7 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Kicker, Shell } from "@/components/r12/shell";
-import { OFFERINGS } from "@/lib/r12/content";
+import { OFFERINGS } from "@/lib/r12/offerings";
 
 export const Route = createFileRoute("/services")({
   head: () => ({

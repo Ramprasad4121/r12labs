@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { ProofGraph } from "@/components/r12/proof-graph";
 import { Shell } from "@/components/r12/shell";
+import type { RoutePath } from "@/lib/r12/nav";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -17,21 +18,21 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const SERVICES = [
+const SERVICES: { title: string; body: string; to: RoutePath }[] = [
   {
     title: "Formal verification",
     body: "Machine-checkable properties for protocol behavior, with assumptions and proof boundaries stated plainly.",
-    to: "/formal-verification" as const,
+    to: "/formal-verification",
   },
   {
     title: "Security review",
     body: "Manual adversarial review for code paths and system boundaries a formal specification may not name.",
-    to: "/services" as const,
+    to: "/services",
   },
   {
     title: "Verification strategy",
     body: "Engagement design for teams that need the right properties before critical code hardens.",
-    to: "/methodology" as const,
+    to: "/methodology",
   },
 ];
 
