@@ -133,7 +133,7 @@ function Footer({ page }: { page: string }) {
             <span className="text-base font-medium tracking-tight">R12 Labs</span>
           </div>
           <p className="mt-3 max-w-sm text-muted">
-            Formal verification and security engineering for EVM and Solana.
+            Formal verification and security engineering for EVM and Solana. R12Labs.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-8 text-sm">

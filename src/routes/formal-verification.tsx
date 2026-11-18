@@ -4,7 +4,7 @@ import { Shell } from "@/components/r12/shell";
 export const Route = createFileRoute("/formal-verification")({
   head: () => ({
     meta: [
-      { title: "Formal verification — R12 Labs" },
+      { title: "Formal verification — R12Labs" },
       {
         name: "description",
         content:

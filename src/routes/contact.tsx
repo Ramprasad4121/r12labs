@@ -5,7 +5,7 @@ import { Shell } from "@/components/r12/shell";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — R12 Labs" },
+      { title: "Contact — R12Labs" },
       {
         name: "description",
         content:

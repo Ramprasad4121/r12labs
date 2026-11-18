@@ -4,6 +4,31 @@ import { AuthProvider } from "@/lib/auth/provider";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
 import appCss from "../styles.css?url";
 
+const SITE_JSON_LD = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://r12labs.xyz/#organization",
+      name: "R12 Labs",
+      alternateName: ["R12Labs", "r12labs"],
+      url: "https://r12labs.xyz/",
+      logo: "https://r12labs.xyz/r12-mark.png",
+      email: "ramprasadgoud34@gmail.com",
+      description:
+        "R12 Labs (R12Labs) is a formal verification firm for EVM and Solana protocols.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://r12labs.xyz/#website",
+      url: "https://r12labs.xyz/",
+      name: "R12Labs",
+      alternateName: "R12 Labs",
+      publisher: { "@id": "https://r12labs.xyz/#organization" },
+    },
+  ],
+});
+
 const FONT =
   "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap";
 
@@ -12,11 +37,11 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "R12 Labs" },
+      { title: "R12Labs" },
       {
         name: "description",
         content:
-          "R12 Labs verifies critical properties of EVM and Solana systems, and audits the code around them.",
+          "R12 Labs (R12Labs) verifies critical properties of EVM and Solana systems, and audits the code around them.",
       },
       { name: "theme-color", content: "#f7f5f0" },
     ],
@@ -41,6 +66,7 @@ function RootComponent() {
       <head>
         <HeadContent />
         <link rel="canonical" href={`https://r12labs.xyz${path === "/" ? "/" : path}`} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: SITE_JSON_LD }} />
       </head>
       <body>
         <PreviewHostBridge />

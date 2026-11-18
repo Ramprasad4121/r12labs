@@ -6,11 +6,11 @@ import { Shell } from "@/components/r12/shell";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "R12 Labs — Formal verification for onchain systems" },
+      { title: "R12Labs — Formal verification for EVM and Solana" },
       {
         name: "description",
         content:
-          "R12 Labs helps EVM and Solana teams formalize and verify the protocol properties they cannot afford to break.",
+          "R12Labs is R12 Labs, a formal verification firm for EVM and Solana. We specify and check the protocol properties that must not break.",
       },
     ],
   }),

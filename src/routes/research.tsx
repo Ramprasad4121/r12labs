@@ -6,7 +6,7 @@ import { LINKS } from "@/lib/r12/content";
 export const Route = createFileRoute("/research")({
   head: () => ({
     meta: [
-      { title: "Research — R12 Labs" },
+      { title: "Research — R12Labs" },
       {
         name: "description",
         content:
