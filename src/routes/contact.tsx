@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contact")({
 
 function ContactPage() {
   return (
-    <Shell page="Contact">
+    <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-12 sm:px-8">
         <p className="text-sm font-medium text-signal">Contact</p>
         <h1 className="mt-4 max-w-4xl text-5xl leading-[1.02] sm:text-6xl">Contact R12 Labs.</h1>

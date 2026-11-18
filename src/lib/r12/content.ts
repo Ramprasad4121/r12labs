@@ -1,7 +1,7 @@
 export type Chain = "EVM" | "Solana" | "Cross-chain" | "Agents";
 export type Severity = "Critical" | "High" | "Medium";
 
-export type BugClass = {
+type BugClass = {
   id: string;
   title: string;
   chain: Chain;
@@ -22,24 +22,6 @@ export const NAV = [
   { to: "/research", label: "Research", exact: false },
   { to: "/about", label: "About", exact: false },
   { to: "/contact", label: "Contact", exact: false },
-] as const;
-
-export const RULES = [
-  {
-    index: "01",
-    title: "Invariants before lines",
-    body: "We write what must stay true — balances, authority, accounting — before we read for style. A pretty contract with a broken invariant is still broken.",
-  },
-  {
-    index: "02",
-    title: "A proof for every High",
-    body: "Severity without a way to break it is an opinion. High and Critical findings ship with a reproduction, or they do not ship.",
-  },
-  {
-    index: "03",
-    title: "The review ends at the fix",
-    body: "A PDF is not the end of the work. We re-read the patch against the original proof and say whether the break is gone.",
-  },
 ] as const;
 
 export const OFFERINGS = [
@@ -128,14 +110,6 @@ export const PHASES = [
     time: "After your patch",
     body: "We re-run the original proof against the fix. “Addressed” is a claim we test, not a status typed into a spreadsheet.",
   },
-] as const;
-
-export const PREP = [
-  "Repository access, or a note that the code is not ready to share yet.",
-  "Deployed addresses, if anything is already live.",
-  "Who can upgrade, pause, or move funds.",
-  "Prior reviews, and what they did not cover.",
-  "The date you need a first read, and what is explicitly out of scope.",
 ] as const;
 
 export const CLASSES: BugClass[] = [
@@ -264,29 +238,7 @@ export const CLASSES: BugClass[] = [
   },
 ];
 
-export const REFUSALS = [
-  "We do not sell an audit badge for a launch announcement.",
-  "We do not review code we did not read.",
-  "We do not publish private findings.",
-  "We do not staff a model and call the output a review. Search can be assisted. A person signs the report.",
-] as const;
-
-export const QUESTIONS = [
-  "What must not break, in one sentence?",
-  "What is already deployed, and at which addresses?",
-  "Who can upgrade, pause, or move funds?",
-  "What did the last review miss, or never cover?",
-  "What is explicitly out of scope?",
-] as const;
-
 export const INQUIRY_EMAIL = "ramprasadgoud34@gmail.com";
-
-export function inquiryMailto(subject: string, body?: string): string {
-  const params = new URLSearchParams();
-  params.set("subject", subject);
-  if (body) params.set("body", body);
-  return `mailto:${INQUIRY_EMAIL}?${params.toString()}`;
-}
 
 export const LINKS = {
   principal: "https://www.ramprasadgoud.dev",
@@ -294,18 +246,3 @@ export const LINKS = {
   github: "https://github.com/Ramprasad4121",
   sentinel: "https://github.com/Ramprasad4121/anchor-sentinel",
 } as const;
-
-export function planningRange(size: string, surface: string): string {
-  if (size === "15k+" || size === "Not sure") {
-    return "We will not invent a week count. The range comes after the repo is actually opened.";
-  }
-  if (surface === "Upgrade diff" && (size === "Under 1k" || size === "1–5k")) {
-    return "A diff of this size is often one to two weeks, including the fix check.";
-  }
-  if (size === "Under 1k") return "Often about a week, including the fix check. Not a quote.";
-  if (size === "1–5k") return "Often two to three weeks, including the fix check. Not a quote.";
-  if (surface === "Solana program" && size === "5–15k") {
-    return "Often three to five weeks, including the fix check. Not a quote.";
-  }
-  return "Often three to five weeks, including the fix check. Not a quote.";
-}

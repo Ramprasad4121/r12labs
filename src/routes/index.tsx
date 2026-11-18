@@ -37,7 +37,7 @@ const SERVICES = [
 
 function Home() {
   return (
-    <Shell page="Home">
+    <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-16 sm:px-8 lg:pt-24 lg:pb-28">
         <div className="grid gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
           <div>

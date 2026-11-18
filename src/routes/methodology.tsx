@@ -65,7 +65,7 @@ function MethodologyPage() {
   const phase = PHASES[active] ?? PHASES[0];
 
   return (
-    <Shell page="Method">
+    <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-8 sm:px-8">
         <p className="font-mono text-xs tracking-widest text-signal uppercase">Methodology</p>
         <h1 className="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl">

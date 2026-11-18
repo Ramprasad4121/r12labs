@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import { CLASSES, type Chain, type Severity } from "@/lib/r12/content";
-import { Chip, severityTone } from "./finding-slip";
 
 const CHAINS: Array<Chain | "All"> = ["All", "EVM", "Solana", "Cross-chain", "Agents"];
 const SEVERITIES: Array<Severity | "All"> = ["All", "Critical", "High", "Medium"];
@@ -126,5 +125,26 @@ function FilterRow<T extends string>({
         );
       })}
     </div>
+  );
+}
+
+function severityTone(severity: Severity): "signal" | "ink" | "muted" {
+  if (severity === "Critical" || severity === "High") return "signal";
+  return "muted";
+}
+
+function Chip({
+  children,
+  tone = "muted",
+}: {
+  children: React.ReactNode;
+  tone?: "signal" | "ink" | "muted";
+}) {
+  const toneClass =
+    tone === "signal" ? "text-signal" : tone === "ink" ? "text-ink" : "text-muted";
+  return (
+    <span className={`border border-rule px-2 py-1 font-mono text-[11px] tracking-widest uppercase ${toneClass}`}>
+      {children}
+    </span>
   );
 }

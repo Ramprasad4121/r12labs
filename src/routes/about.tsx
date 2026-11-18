@@ -18,7 +18,7 @@ export const Route = createFileRoute("/about")({
 
 function AboutPage() {
   return (
-    <Shell page="About">
+    <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-8 sm:px-8">
         <Kicker>About</Kicker>
         <h1 className="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl">

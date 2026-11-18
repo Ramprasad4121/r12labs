@@ -5,10 +5,8 @@ import { LINKS, NAV } from "@/lib/r12/content";
 import { Mark } from "./mark";
 
 export function Shell({
-  page,
   children,
 }: {
-  page: string;
   children: React.ReactNode;
 }) {
   return (
@@ -21,7 +19,7 @@ export function Shell({
       </a>
       <Header />
       <main id="content">{children}</main>
-      <Footer page={page} />
+      <Footer />
     </div>
   );
 }
@@ -123,7 +121,7 @@ function NavItem({
   );
 }
 
-function Footer({ page }: { page: string }) {
+function Footer() {
   return (
     <footer className="border-t border-rule">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.2fr_1fr]">

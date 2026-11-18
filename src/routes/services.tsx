@@ -28,7 +28,7 @@ function ServicesPage() {
   const [open, setOpen] = useState<string>(OFFERINGS[0].index);
 
   return (
-    <Shell page="Services">
+    <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-8 sm:px-8">
         <Kicker>Services</Kicker>
         <h1 className="mt-4 max-w-3xl text-5xl leading-[1.05] sm:text-6xl">
