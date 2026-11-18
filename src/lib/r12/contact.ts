@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { INQUIRY_EMAIL } from "./content";
+import { INQUIRY_EMAIL } from "./site";
 
 const ENGAGEMENTS = ["Formal verification", "Security review", "Verification strategy"] as const;
 const CODE_STATES = ["Public repository", "Private repository", "Still in design", "Prefer to discuss first"] as const;

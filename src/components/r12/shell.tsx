@@ -1,7 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { LINKS, NAV } from "@/lib/r12/content";
+import { isRouteActive, NAV, type NavEntry } from "@/lib/r12/nav";
+import { LINKS } from "@/lib/r12/site";
 import { Mark } from "./mark";
 
 export function Shell({
@@ -50,7 +51,7 @@ function Header() {
         </Link>
         <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary">
           {NAV.filter((item) => item.to !== "/contact").map((item) => (
-            <NavItem key={item.to} path={path} {...item} />
+            <NavItem key={item.to} entry={item} path={path} />
           ))}
           <Link
             to="/contact"
@@ -78,7 +79,7 @@ function Header() {
         >
           <ul className="flex flex-col">
             {NAV.map((item) => {
-              const active = item.exact ? path === item.to : path === item.to || path.startsWith(`${item.to}/`);
+              const active = isRouteActive(path, item.to);
               return (
                 <li key={item.to} className="border-b border-rule">
                   <Link
@@ -99,24 +100,15 @@ function Header() {
   );
 }
 
-function NavItem({
-  to,
-  label,
-  path,
-}: {
-  to: (typeof NAV)[number]["to"];
-  label: string;
-  exact: boolean;
-  path: string;
-}) {
-  const active = path === to || path.startsWith(`${to}/`);
+function NavItem({ entry, path }: { entry: NavEntry; path: string }) {
+  const active = isRouteActive(path, entry.to);
   return (
     <Link
-      to={to}
+      to={entry.to}
       className={`text-sm ${active ? "text-ink" : "text-muted hover:text-ink"}`}
       aria-current={active ? "page" : undefined}
     >
-      {label}
+      {entry.label}
     </Link>
   );
 }
