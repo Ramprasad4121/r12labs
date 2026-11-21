@@ -2,6 +2,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { ProofGraph } from "@/components/r12/proof-graph";
 import { Shell } from "@/components/r12/shell";
+import { VerificationRun } from "@/components/r12/verification-run";
 import type { RoutePath } from "@/lib/r12/nav";
 import { LINKS, REPORTS } from "@/lib/r12/site";
 
@@ -96,15 +97,7 @@ function Home() {
             </div>
           </div>
 
-          <figure className="border border-rule bg-panel p-4 sm:p-6">
-            <a href={REPORTS.timbswap} target="_blank" rel="noreferrer" className="block border border-rule bg-white">
-              <img src="/report-timbswap.png" alt="Executive summary page from the TimbSwap security audit report" className="h-80 w-full object-cover object-top sm:h-96" />
-            </a>
-            <figcaption className="mt-4 text-sm text-muted">
-              From a public R12 report: TimbSwap, 1 High and 2 Medium findings, each with a proof of concept.{" "}
-              <a className="text-signal" href={REPORTS.timbswap} target="_blank" rel="noreferrer">Read the report</a>
-            </figcaption>
-          </figure>
+          <VerificationRun />
         </div>
       </section>
 
