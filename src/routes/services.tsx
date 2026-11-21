@@ -6,7 +6,7 @@ import { OFFERINGS } from "@/lib/r12/offerings";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — R12Labs" },
+      { title: "Smart contract audits and services | R12 Labs" },
       {
         name: "description",
         content:
