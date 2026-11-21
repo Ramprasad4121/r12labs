@@ -111,6 +111,19 @@ function Home() {
         </div>
       </section>
 
+      <section className="border-t border-rule bg-panel">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+          <p className="text-sm font-medium text-signal">Partner</p>
+          <p className="max-w-2xl text-muted">
+            R12 Labs is partnered with{" "}
+            <a className="text-signal" href="https://www.bevor.io" target="_blank" rel="noreferrer">
+              Bevor
+            </a>
+            , the smart contract security workspace that keeps findings linked to the code across reviews.
+          </p>
+        </div>
+      </section>
+
       <section className="border-t border-rule bg-ink text-on-signal">
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end lg:py-20">
           <div>

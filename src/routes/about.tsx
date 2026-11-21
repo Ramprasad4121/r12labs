@@ -60,6 +60,19 @@ function AboutPage() {
           </ul>
         </article>
       </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-8">
+        <article className="border border-rule bg-bone p-6 sm:p-8">
+          <p className="text-sm font-medium text-signal">Partners</p>
+          <h2 className="mt-3 font-serif text-3xl">Bevor</h2>
+          <p className="mt-4 max-w-2xl text-muted">
+            R12 Labs is partnered with Bevor Labs. Bevor gives security tools and reviewers a shared workspace, with a graph of execution paths and findings that stay linked to the code between reviews.
+          </p>
+          <a className="mt-5 inline-block text-sm text-signal" href="https://www.bevor.io" target="_blank" rel="noreferrer">
+            bevor.io
+          </a>
+        </article>
+      </section>
     </Shell>
   );
 }
