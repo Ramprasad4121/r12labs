@@ -75,7 +75,7 @@ function Home() {
   return (
     <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-16 sm:px-8 lg:pt-24 lg:pb-28">
-        <div className="grid gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
+        <div className="grid gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
           <div>
             <p className="text-sm font-medium text-signal">Smart contract audits and formal verification for EVM and Solana</p>
             <h1 className="mt-5 max-w-3xl text-5xl leading-[0.98] sm:text-6xl lg:text-7xl">
