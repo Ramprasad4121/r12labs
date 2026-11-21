@@ -3,15 +3,16 @@ import { ArrowUpRight } from "lucide-react";
 import { ProofGraph } from "@/components/r12/proof-graph";
 import { Shell } from "@/components/r12/shell";
 import type { RoutePath } from "@/lib/r12/nav";
+import { LINKS, REPORTS } from "@/lib/r12/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "R12Labs — Formal verification for EVM and Solana" },
+      { title: "R12 Labs | Smart contract audits and formal verification" },
       {
         name: "description",
         content:
-          "R12Labs is R12 Labs, a formal verification firm for EVM and Solana. We specify and check the protocol properties that must not break.",
+          "R12 Labs does smart contract audits and formal verification for EVM and Solana protocols. Public reports, clear evidence, and the properties that must not break.",
       },
     ],
   }),
@@ -36,41 +37,72 @@ const SERVICES: { title: string; body: string; to: RoutePath }[] = [
   },
 ];
 
+const WORK = [
+  {
+    name: "TimbSwap",
+    chain: "EVM · DeFi exchange, governance, vaults",
+    body: "Governance and release vault review with a proof of concept for every finding.",
+    result: "1 High, 2 Medium",
+    href: REPORTS.timbswap,
+    cta: "Read the report",
+  },
+  {
+    name: "MetaLend",
+    chain: "Solana · Lending and flash loans",
+    body: "Lending protocol with cTokens, liquidations, and flash loans, plus a fix review.",
+    result: "13 findings: 2 Critical, 9 High, 2 Medium",
+    href: REPORTS.metalend,
+    cta: "Read the report",
+  },
+  {
+    name: "Anchor-Sentinel",
+    chain: "Solana · Open-source tooling",
+    body: "Static analyzer that flags common Anchor security mistakes before review starts.",
+    result: "Open source",
+    href: LINKS.sentinel,
+    cta: "View on GitHub",
+  },
+];
+
+const STEPS = [
+  { title: "Scope", body: "Share the repo or commit. We agree what is in scope and which properties matter most." },
+  { title: "Review and verify", body: "Manual review, fuzzing, and formal checks where they pay off. Findings come with a proof of concept." },
+  { title: "Report and fix review", body: "A written report with severity and fixes, then a check of your patches before launch." },
+];
+
 function Home() {
   return (
     <Shell>
       <section className="mx-auto max-w-6xl px-5 pt-14 pb-16 sm:px-8 lg:pt-24 lg:pb-28">
         <div className="grid gap-12 lg:grid-cols-[1.06fr_0.94fr] lg:items-end">
           <div>
-            <p className="text-sm font-medium text-signal">Formal verification for EVM and Solana</p>
+            <p className="text-sm font-medium text-signal">Smart contract audits and formal verification for EVM and Solana</p>
             <h1 className="mt-5 max-w-3xl text-5xl leading-[0.98] sm:text-6xl lg:text-7xl">
               Protect the rules your protocol depends on.
             </h1>
             <p className="mt-7 max-w-2xl text-lg leading-8 text-muted">
-              R12 Labs formalizes and verifies the rules that move value in EVM and Solana protocols.
+              R12 Labs audits and formally verifies the rules that move value in EVM and Solana protocols.
             </p>
             <div className="mt-9 flex flex-wrap gap-4">
               <Link to="/contact" className="inline-flex h-12 items-center gap-2 bg-signal px-5 text-sm font-medium text-on-signal transition-colors hover:bg-ink">
                 Discuss an engagement <ArrowUpRight className="size-4" aria-hidden="true" />
               </Link>
+              <a href={LINKS.calendly} target="_blank" rel="noreferrer" className="inline-flex h-12 items-center border border-ink px-5 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-on-signal">
+                Book a 30 min call
+              </a>
               <Link to="/methodology" className="site-link inline-flex h-12 items-center text-sm text-ink">
                 How we work
               </Link>
             </div>
           </div>
 
-          <figure className="relative overflow-hidden border border-rule bg-ink">
-            <img
-              src="/verification-lab.jpg"
-              alt="A close view of an electronic circuit board"
-              className="h-80 w-full object-cover opacity-70 grayscale sm:h-96"
-            />
-            <div className="hero-image-overlay absolute inset-0" />
-            <figcaption className="absolute inset-x-0 bottom-0 p-6 text-on-signal sm:p-8">
-              <p className="text-sm font-medium text-on-signal/65">A formal result is specific by design.</p>
-              <p className="mt-3 max-w-md font-serif text-2xl leading-tight sm:text-3xl">
-                It states the property, the model, and the conditions under which it holds.
-              </p>
+          <figure className="border border-rule bg-panel p-4 sm:p-6">
+            <a href={REPORTS.timbswap} target="_blank" rel="noreferrer" className="block border border-rule bg-white">
+              <img src="/report-timbswap.png" alt="Executive summary page from the TimbSwap security audit report" className="h-80 w-full object-cover object-top sm:h-96" />
+            </a>
+            <figcaption className="mt-4 text-sm text-muted">
+              From a public R12 report: TimbSwap, 1 High and 2 Medium findings, each with a proof of concept.{" "}
+              <a className="text-signal" href={REPORTS.timbswap} target="_blank" rel="noreferrer">Read the report</a>
             </figcaption>
           </figure>
         </div>
@@ -108,6 +140,65 @@ function Home() {
               <ArrowUpRight className="size-5 text-signal transition-transform duration-150 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className="border-t border-rule">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+          <div className="max-w-2xl">
+            <p className="text-sm font-medium text-signal">Selected work</p>
+            <h2 className="mt-4 text-4xl sm:text-5xl">Public reports. Read what you would get.</h2>
+          </div>
+          <div className="mt-10 grid gap-px bg-rule md:grid-cols-3">
+            {WORK.map((item) => (
+              <a key={item.name} href={item.href} target="_blank" rel="noreferrer" className="group flex flex-col bg-bone p-6 transition-colors hover:bg-panel sm:p-8">
+                <p className="text-sm text-muted">{item.chain}</p>
+                <h3 className="mt-2 font-serif text-2xl">{item.name}</h3>
+                <p className="mt-3 text-muted">{item.body}</p>
+                <p className="mt-5 text-sm font-medium text-ink">{item.result}</p>
+                <span className="mt-auto pt-6 text-sm text-signal">{item.cta}</span>
+              </a>
+            ))}
+          </div>
+          <a className="mt-6 inline-block text-sm text-signal" href={LINKS.reports} target="_blank" rel="noreferrer">All public reports on GitHub</a>
+        </div>
+      </section>
+
+      <section className="border-t border-rule bg-panel">
+        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:py-20">
+          <div>
+            <p className="text-sm font-medium text-signal">Who does the work</p>
+            <h2 className="mt-4 text-4xl sm:text-5xl">Ramprasad Edigi</h2>
+            <p className="mt-3 text-muted">Principal, R12 Labs</p>
+          </div>
+          <div>
+            <ul className="space-y-3 text-lg">
+              <li>Solana Foundation certified Security Researcher.</li>
+              <li>8 security audits across EVM and Solana, reports public where clients allow.</li>
+              <li>Built Anchor-Sentinel, an open-source static analyzer for Anchor programs.</li>
+            </ul>
+            <p className="mt-6 text-muted">You talk to the person reading your code, from scoping to the fix review.</p>
+            <div className="mt-6 flex flex-wrap gap-5 text-sm">
+              <a className="text-signal" href={LINKS.principal} target="_blank" rel="noreferrer">Principal site</a>
+              <a className="text-signal" href={LINKS.github} target="_blank" rel="noreferrer">GitHub</a>
+              <a className="text-signal" href={LINKS.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-rule">
+        <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8 lg:py-20">
+          <p className="text-sm font-medium text-signal">How an engagement starts</p>
+          <ol className="mt-8 grid gap-px bg-rule md:grid-cols-3">
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="bg-bone p-6 sm:p-8">
+                <p className="font-serif text-3xl text-signal">0{i + 1}</p>
+                <h3 className="mt-3 font-serif text-2xl">{step.title}</h3>
+                <p className="mt-3 text-muted">{step.body}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
